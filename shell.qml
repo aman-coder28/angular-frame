@@ -40,13 +40,19 @@ ShellRoot {
 
 	  implicitWidth: 300
 	  implicitHeight: 734
-	  color: colors.bgColor
 
-		Canvas {
-      id: clockFace
-      anchors.fill: parent
-      anchors.margins: 0
-      antialiasing: true
+		AngularFrame {
+			id: angularFrame
+		  width: 300
+		  height: 734
+		  cornerCut: 70
+		  borderColor: colors.accentColor
+		  bgColor: colors.bgColor
+		  cutTopLeft: true
+		  cutBottomRight: false
+
+		  // your clock / weather / system stats content goes here,
+		  // just anchor it inside with margins so it doesn't overlap the cut corner
 		}
 	}
 }
