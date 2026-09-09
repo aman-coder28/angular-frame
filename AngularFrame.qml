@@ -6,35 +6,20 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
 import QtQuick.Effects
+import "."
 
 Shape {
-	id: shapeFrame
-	// anchors.fill: parent
-
-	FileView {
-    id: noctaliaColors
-    path: Quickshell.env("HOME") + "/.config/quickshell/noctalia-colors.json"
-    watchChanges: true
-    onFileChanged: reload()
-    onAdapterUpdated: writeAdapter()
-
-    JsonAdapter {
-    	id: colors
-      property string accentColor
-      property string bgColor
-      property string primaryColor
-    }
-  }
+	id: shapeFrames
 
   ShapePath {
-    strokeWidth: 7
-    strokeColor: colors.primaryColor
+    strokeWidth: 8
+    strokeColor: Colors.accentColor
     strokeStyle: ShapePath.SolidLine
     joinStyle: ShapePath.MiterJoin
     fillColor: "transparent"
 
-    startX: 460; startY: 5
-    PathLine { x: 250; y: 150 }
-    PathLine { x: 250; y: 750 }
+    startX: 460; startY: 2
+    PathLine { x: 251; y: 146.5 }
+    PathLine { x: 251; y: 750 }
   }
 }

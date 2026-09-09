@@ -4,23 +4,9 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
+import "."
 
 ShellRoot {
-	FileView {
-    id: noctaliaColors
-    path: Quickshell.env("HOME") + "/.config/quickshell/noctalia-colors.json"
-    watchChanges: true
-    onFileChanged: reload()
-    onAdapterUpdated: writeAdapter()
-
-    JsonAdapter {
-    	id: colors
-      property string accentColor
-      property string bgColor
-      property string primaryColor
-    }
-  }
-
 	PanelWindow {
 	  anchors {
 		  top: true
@@ -36,18 +22,18 @@ ShellRoot {
 	  WlrLayershell.namespace: "material-frame"
 
 		width: 1366
-		height: 8
+		height: 7
 
-		color: colors.bgColor
+		color: Colors.bgColor
 
 		Rectangle {
 		  id: topBar
 
 			width: 1366
-			height: 8
-			color: colors.bgColor
+			height: 7
+			color: Colors.bgColor
 
-			border.color: colors.accentColor
+			border.color: Colors.accentColor
     	border.width: 8
 		}
 	}
@@ -74,12 +60,12 @@ ShellRoot {
 		}
 
 		width: 253
-		height: 734
+		height: 736
 
 		implicitWidth: 289
-		implicitHeight: 734
+		implicitHeight: 736
 
-		color: colors.bgColor
+		color: Colors.bgColor
 
 	  AngularFrame {
 	    id: leftFrame
