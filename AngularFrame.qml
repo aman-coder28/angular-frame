@@ -26,6 +26,7 @@ Shape {
     strokeWidth: 7
     strokeColor: colors.accentColor
     strokeStyle: ShapePath.SolidLine
+    joinStyle: ShapePath.MiterJoin
     fillColor: "transparent"
 
     startX: 460; startY: 5
