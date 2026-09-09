@@ -42,8 +42,8 @@ PanelWindow {
     anchors.fill: parent
 
     ShapePath {
-	    strokeWidth: 7
-	    strokeColor: colors.primaryColor
+	    strokeWidth: 8
+	    strokeColor: "transparent"
 	    strokeStyle: ShapePath.SolidLine
 	    joinStyle: ShapePath.MiterJoin
 	    fillColor: colors.bgColor
@@ -52,6 +52,17 @@ PanelWindow {
       PathLine { x: 0; y: trianglePanel.height }
       PathLine { x: trianglePanel.width; y: 0 }
       PathLine { x: 0; y: 0 }
+    }
+
+    ShapePath {
+    	strokeWidth: 8
+	    strokeColor: colors.accentColor
+	    strokeStyle: ShapePath.SolidLine
+			joinStyle: ShapePath.MiterJoin
+      fillColor: colors.bgColor
+
+      startX: 150; startY: 0
+      PathLine { x: 0; y: 150 }
     }
   }
 }
