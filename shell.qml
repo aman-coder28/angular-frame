@@ -5,8 +5,54 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
 
-
 ShellRoot {
+	FileView {
+    id: noctaliaColors
+    path: Quickshell.env("HOME") + "/.config/quickshell/noctalia-colors.json"
+    watchChanges: true
+    onFileChanged: reload()
+    onAdapterUpdated: writeAdapter()
+
+    JsonAdapter {
+    	id: colors
+      property string accentColor
+      property string bgColor
+      property string primaryColor
+    }
+  }
+
+	PanelWindow {
+	  anchors {
+		  top: true
+		  left: true
+		}
+
+		margins {
+		  top: 0
+		  left: 0
+		}
+
+	  WlrLayershell.layer: WlrLayershell.Background
+	  WlrLayershell.namespace: "material-frame"
+
+		width: 1366
+		height: 8
+
+		color: colors.bgColor
+
+		Rectangle {
+		  id: topBar
+
+			width: 1366
+			height: 8
+			color: colors.bgColor
+
+			border.color: colors.accentColor
+    	border.width: 8
+		}
+	}
+
+
 	PanelWindow {
 	  id: root
 
@@ -15,44 +61,27 @@ ShellRoot {
 
 	  anchors {
 	    top: true
-	    right: true
-	  }
-
-		FileView {
-	    id: noctaliaColors
-	    path: Quickshell.env("HOME") + "/.config/quickshell/noctalia-colors.json"
-	    watchChanges: true
-	    onFileChanged: reload()
-	    onAdapterUpdated: writeAdapter()
-
-	    JsonAdapter {
-	    	id: colors
-	      property string accentColor: "#903B3B"
-	      property string bgColor: "#ecd1c7"
-	      property string primaryColor: "#090F1B"
-	    }
+	    left: true
 	  }
 
 		margins {
       top: 0
       left: 0
-    }
-
-	  implicitWidth: 300
-	  implicitHeight: 734
-
-		AngularFrame {
-			id: angularFrame
-		  width: 300
-		  height: 734
-		  cornerCut: 70
-		  borderColor: colors.accentColor
-		  bgColor: colors.bgColor
-		  cutTopLeft: true
-		  cutBottomRight: false
-
-		  // your clock / weather / system stats content goes here,
-		  // just anchor it inside with margins so it doesn't overlap the cut corner
 		}
+
+		width: 460
+		height: 734
+
+		implicitWidth: 300
+		implicitHeight: 734
+
+		color: colors.bgColor
+
+	  AngularFrame {
+	    id: leftFrame
+	    anchors.fill: parent
+	  }
 	}
+
+	Clock {}
 }

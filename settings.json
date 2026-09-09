@@ -1,0 +1,18 @@
+{
+	"winX": 20,
+	"winY": 120,
+	"winSize": 180,
+	"scallops": 12,
+	"amplitude": 5,
+	"showNumbers": false,
+	"showTicks": true,
+	"showDayLabel": true,
+	"showDigitalTime": true,
+	"showDateBadge": true,
+	"showSecondHand": true,
+	"showSecondHandLine": true,
+	"usePywal": true,
+	"accentColor": "#903B3B",
+	"bgColor": "#ecd1c7",
+	"primaryColor": "#090F1B"
+}
