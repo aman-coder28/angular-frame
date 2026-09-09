@@ -23,11 +23,12 @@ Shape {
   }
 
   ShapePath {
-    strokeWidth: 8
+    strokeWidth: 7
     strokeColor: colors.accentColor
     strokeStyle: ShapePath.SolidLine
     fillColor: "transparent"
-    startX: 460; startY: 6
+
+    startX: 460; startY: 5
     PathLine { x: 250; y: 150 }
     PathLine { x: 250; y: 750 }
   }
