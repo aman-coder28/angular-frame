@@ -52,6 +52,10 @@ ShellRoot {
 		}
 	}
 
+	Diagonal {
+	  width: 150
+	  height: 150
+	}
 
 	PanelWindow {
 	  id: root
@@ -69,17 +73,17 @@ ShellRoot {
       left: 0
 		}
 
-		width: 460
+		width: 253
 		height: 734
 
-		implicitWidth: 300
+		implicitWidth: 289
 		implicitHeight: 734
 
 		color: colors.bgColor
 
 	  AngularFrame {
 	    id: leftFrame
-	    anchors.fill: parent
+	    // anchors.fill: parent
 	  }
 	}
 

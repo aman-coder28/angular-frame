@@ -5,8 +5,12 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
+import QtQuick.Effects
 
 Shape {
+	id: shapeFrame
+	// anchors.fill: parent
+
 	FileView {
     id: noctaliaColors
     path: Quickshell.env("HOME") + "/.config/quickshell/noctalia-colors.json"
@@ -24,7 +28,7 @@ Shape {
 
   ShapePath {
     strokeWidth: 7
-    strokeColor: colors.accentColor
+    strokeColor: colors.primaryColor
     strokeStyle: ShapePath.SolidLine
     joinStyle: ShapePath.MiterJoin
     fillColor: "transparent"
