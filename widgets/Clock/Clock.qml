@@ -83,7 +83,7 @@ PanelWindow {
     property real ampScaled: (amplitude / 320.0) * winSize
 
     margins {
-        top: 2
+        top: 0
         left: settings.winX
     }
 
