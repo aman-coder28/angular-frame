@@ -10,7 +10,7 @@ The shell renders a background layer on Wayland with two components:
 
 - **Angular Frame** — A full-screen background layer that paints a left sidebar panel with a diagonal cut (chamfered top-right corner), creating the angular aesthetic visible in the screenshot. A thin accent stroke traces the top edge and the diagonal cut.
 
-- **Scalloped Clock** — An analog clock with a scalloped (wavy) edge face, configurable tick marks, hour numbers, clock hands, a curved day-of-week label, and a faint digital time overlay. Fully configurable via `settings.json`. See [Clock.README.md](Clock.README.md) for full details.
+- **Scalloped Clock** — An analog clock with a scalloped (wavy) edge face, configurable tick marks, hour numbers, clock hands, a curved day-of-week label, and a faint digital time overlay. Fully configurable via `settings.json`. See [Clock README.md](widgets/Clock/README.md) for full details.
 
 ## Files
 

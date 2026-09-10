@@ -5,6 +5,8 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
 
+import "widgets/Clock"
+
 import QtQuick.Shapes
 
 ShellRoot {

@@ -4,6 +4,7 @@ import Quickshell.Wayland
 import Quickshell.Io
 import QtQuick.Controls
 import QtQuick.Layouts
+import "../../"
 
 PanelWindow {
     id: root
@@ -18,7 +19,7 @@ PanelWindow {
 
     FileView {
         id: settingsFile
-        path: Quickshell.env("HOME") + "/.config/quickshell/angular-frame/settings.json"
+        path: Quickshell.env("HOME") + "/.config/quickshell/angular-frame/widgets/Clock/settings.json"
 
         JsonAdapter {
             id: settings
