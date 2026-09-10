@@ -27,7 +27,7 @@ This project was built as a Quickshell Wayland desktop widget featuring:
 
 ## Showcase
 
-![Material Scalloped Clock](clocks.png)
+![Material Scalloped Clock](clock.png)
 
 ## Prerequisites
 
