@@ -4,7 +4,6 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
-import "."
 
 import QtQuick.Shapes
 
@@ -23,7 +22,7 @@ ShellRoot {
         WlrLayershell.namespace: "material-frame"
         color: "transparent"
 
-        property int panelW: Math.round(width * 0.185)
+        property int panelW: Math.round(width * 0.190)
         property int cutout: Math.round(width * 0.11)
         property int strokeW: 8
 

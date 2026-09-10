@@ -4,7 +4,6 @@ import Quickshell.Wayland
 import Quickshell.Io
 import QtQuick.Controls
 import QtQuick.Layouts
-import "."
 
 PanelWindow {
     id: root
@@ -20,6 +19,7 @@ PanelWindow {
     FileView {
         id: settingsFile
         path: Quickshell.env("HOME") + "/.config/quickshell/angular-frame/settings.json"
+
         JsonAdapter {
             id: settings
             property int winX: 100
@@ -82,7 +82,7 @@ PanelWindow {
     property real ampScaled: (amplitude / 320.0) * winSize
 
     margins {
-        top: 127
+        top: 2
         left: settings.winX
     }
 
