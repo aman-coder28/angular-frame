@@ -73,9 +73,9 @@ Noctalia v5 is a native runtime (not Quickshell like v4 was), so it doesn't shar
 
 ```json
 {
-	"accentColor": "{{ colors.primary.default.hex }}",
-	"bgColor": "{{ colors.surface.default.hex }}",
-	"primaryColor": "{{ colors.primary.default.hex }}"
+  "accentColor": "{{ colors.primary.default.hex }}",
+  "bgColor": "{{ colors.surface.default.hex }}",
+  "primaryColor": "{{ colors.primary.default.hex }}"
 }
 ```
 

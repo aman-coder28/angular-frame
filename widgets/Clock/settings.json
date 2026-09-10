@@ -1,14 +1,14 @@
 {
-	"winX": 30,
-	"winY": 120,
-	"winSize": 180,
-	"scallops": 12,
-	"amplitude": 5,
-	"showNumbers": false,
-	"showTicks": true,
-	"showDayLabel": true,
-	"showDigitalTime": true,
-	"showDateBadge": true,
-	"showSecondHand": true,
-	"showSecondHandLine": true
+  "winX": 30,
+  "winY": 120,
+  "winSize": 180,
+  "scallops": 12,
+  "amplitude": 5,
+  "showNumbers": false,
+  "showTicks": true,
+  "showDayLabel": true,
+  "showDigitalTime": true,
+  "showDateBadge": true,
+  "showSecondHand": true,
+  "showSecondHandLine": true
 }
