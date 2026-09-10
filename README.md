@@ -1,62 +1,33 @@
-# Material Scalloped Clock
+# Angular Frame
 
-A highly customizable, Material 3-inspired analog clock widget for Quickshell.
+![Preview](frame.jpg)
 
-## 📝 Overview
+A Wayland desktop Frame built with [Quickshell](https://quickshell.outfoxxed.me/) and Qt Quick, featuring an angular panel frame and a scalloped analog clock.
 
-This project was built as a Quickshell Wayland desktop widget featuring:
+## Overview
 
-- A scalloped background pattern with configurable amplitude
-- Analog clock hands (hour, minute, second)
-- Tick marks and hour numbers
-- Day label (curved text under 12 o'clock)
-- Digital time display and date badge
-- Pywal color palette integration
-- Responsive design that scales with window size
+The shell renders a background layer on Wayland with two components:
 
-## 🛠 Features
+- **Angular Frame** — A full-screen background layer that paints a left sidebar panel with a diagonal cut (chamfered top-right corner), creating the angular aesthetic visible in the screenshot. A thin accent stroke traces the top edge and the diagonal cut.
 
-- **Responsive Scalloped Design**: Perimeter count and amplitude scale with window size
-- **Pywal Integration**: Automatically inherits system colors from `~/.cache/wal/colors.json`
-- **Hybrid Display**: Combined analog hands with a large digital time background
-- **Customizable Components**: Toggleable numbers, tick marks, day-of-week labels, and date badges
-- **Flexible Mechanics**: Independent control over hand lengths, thicknesses, and floating second-hand indicators
-- **Angular Frame**: Decorative angular border surrounding the clock area
+- **Scalloped Clock** — An analog clock with a scalloped (wavy) edge face, configurable tick marks, hour numbers, clock hands, a curved day-of-week label, and a faint digital time overlay. Fully configurable via `settings.json`. See [Clock.README.md](Clock.README.md) for full details.
 
-## 📸 Showcase
+## Files
 
-![Material Scalloped Clock](image.png)
+| File            | Purpose                                                                                  |
+| --------------- | ---------------------------------------------------------------------------------------- |
+| `shell.qml`     | Main entry point. Defines the full-screen background layer with the angular frame shape. |
+| `Clock.qml`     | Analog clock component with scalloped face, hands, tick marks, and digital overlay.      |
+| `Colors.qml`    | Singleton that reads accent/background/primary colors from `noctalia-colors.json`.       |
+| `settings.json` | Clock configuration (size, scallops, amplitude, visibility toggles, hand lengths).       |
 
-## 📋 Prerequisites
+## Configuration
 
-- [Quickshell](https://github.com/outfoxxed/quickshell)
-- Wayland compositor (Hyprland, Sway, etc.)
+Colors are sourced from `~/.config/quickshell/noctalia-colors.json` and updated in real time. Edit that file (or your pywal setup) to change the theme.
 
-## 📦 Installation
+Clock settings live in `settings.json` — see the `Clock.qml` `JsonAdapter` block for all available properties (window size, scallop count, amplitude, hand thickness, visibility flags, etc.).
 
-1. Copy the `clock` directory to `~/.config/quickshell/`.
-2. Ensure `settings.json` and `clock.qml` are in the same folder.
+## Dependencies
 
-## ⚙️ Configuration
-
-Modify `settings.json` to adjust the widget's behavior:
-
-| Property             | Type   | Description                                              |
-| -------------------- | ------ | -------------------------------------------------------- |
-| `winX` & `winY`      | int    | Position of widget over screen                           |
-| `winSize`            | int    | Total width/height of the widget (proportional scaling)  |
-| `scallops`           | int    | Number of scallops around the perimeter                  |
-| `amplitude`          | int    | Depth of the scalloped curves                            |
-| `showNumbers`        | bool   | Toggle visibility of the hour numbers                    |
-| `showTicks`          | bool   | Toggle visibility of the hour and minutes ticks          |
-| `showDayLabel`       | bool   | Toggle visibility of week's day                          |
-| `showDigitalTime`    | bool   | Toggle visibility of the digital time in numbers         |
-| `showDateBadge`      | bool   | Toggle visibility of the month's day date                |
-| `showSecondHand`     | bool   | Toggle visibility of the second hand                     |
-| `showSecondHandLine` | bool   | Toggle between a full line or a floating dot for seconds |
-| `usePywal`           | bool   | Prioritize Pywal color palette over static colors        |
-| `accentColor`        | string | Custom accent color if Pywal isn't installed             |
-| `bgColor`            | string | Custom bg color if Pywal isn't installed                 |
-| `primaryColor`       | string | Custom primary color if Pywal isn't installed            |
-
-_Built with QtQuick and Quickshell for a modern Wayland desktop experience._
+- [Quickshell](https://quickshell.outfoxxed.me/) with Wayland support
+- Qt 6 (QtQuick, QtQuick.Controls, QtQuick.Shapes)
