@@ -1,77 +1,74 @@
 import QtQuick
-import Quickshell.Io
 import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell
+import Quickshell.Io
 import Quickshell.Wayland
 import "."
 
+import QtQuick.Shapes
+
 ShellRoot {
-	PanelWindow {
-	  anchors {
-		  top: true
-		  left: true
-		}
+  PanelWindow {
+    id: frameWindow
 
-		margins {
-		  top: 0
-		  left: 0
-		}
+    anchors { top: true; left: true; right: true; bottom: true }
 
-	  WlrLayershell.layer: WlrLayershell.Background
-	  WlrLayershell.namespace: "material-frame"
+    WlrLayershell.layer: WlrLayershell.Background
+    WlrLayershell.namespace: "material-frame"
+    color: "transparent"
 
-		width: 1366
-		height: 7
+    property int panelW: Math.round(width * 0.185)
+    property int cutout: Math.round(width * 0.11)
+    property int strokeW: 8
 
-		color: Colors.bgColor
+    Rectangle {
+      width: frameWindow.panelW
+      height: frameWindow.height
+      color: Colors.bgColor
+    }
 
-		Rectangle {
-		  id: topBar
+    Shape {
+      id: frame
+      anchors.fill: parent
 
-			width: 1366
-			height: 7
-			color: Colors.bgColor
+	    ShapePath {
+	      strokeWidth: frameWindow.strokeW
+	      strokeColor: Colors.accentColor
+	      strokeStyle: ShapePath.SolidLine
+	      joinStyle: ShapePath.MiterJoin
+	      fillColor: "transparent"
 
-			border.color: Colors.accentColor
-    	border.width: 8
-		}
-	}
+	      startX: frame.width - frameWindow.strokeW / 2
+	      startY: frameWindow.strokeW / 2
+	      PathLine { x: frameWindow.panelW + 5; y: frameWindow.strokeW / 2 }
+	    }
 
-	Diagonal {
-	  width: 150
-	  height: 150
-	}
+      // seal the diagonal cut so the wallpaper doesn't show through
+      ShapePath {
+        fillColor: Colors.bgColor
+        strokeColor: "transparent"
+        startX: frameWindow.panelW; startY: 0
+        PathLine { x: frameWindow.panelW + frameWindow.cutout; y: 0 }
+        PathLine { x: frameWindow.panelW; y: frameWindow.cutout }
+        PathLine { x: frameWindow.panelW; y: 0 }
+      }
 
-	PanelWindow {
-	  id: root
+      // the frame line: top edge -> diagonal -> down the column
+      ShapePath {
+        strokeWidth: frameWindow.strokeW
+        strokeColor: Colors.accentColor
+        strokeStyle: ShapePath.SolidLine
+        joinStyle: ShapePath.MiterJoin
+        fillColor: "transparent"
 
-	  WlrLayershell.layer: WlrLayershell.Background
-	  WlrLayershell.namespace: "material-frame"
+        startX: frame.width; startY: 0
+        PathLine { x: frameWindow.panelW + frameWindow.cutout; y: 0 }
+        PathLine { x: frameWindow.panelW; y: frameWindow.cutout }
+        PathLine { x: frameWindow.panelW; y: frame.height }
+      }
+    }
+  }
 
-	  anchors {
-	    top: true
-	    left: true
-	  }
-
-		margins {
-      top: 0
-      left: 0
-		}
-
-		width: 253
-		height: 736
-
-		implicitWidth: 289
-		implicitHeight: 736
-
-		color: Colors.bgColor
-
-	  AngularFrame {
-	    id: leftFrame
-	    // anchors.fill: parent
-	  }
-	}
-
-	Clock {}
+  Clock {}
 }

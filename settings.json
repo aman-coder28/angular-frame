@@ -10,9 +10,5 @@
 	"showDigitalTime": true,
 	"showDateBadge": true,
 	"showSecondHand": true,
-	"showSecondHandLine": true,
-	"usePywal": true,
-	"accentColor": "#903B3B",
-	"bgColor": "#ecd1c7",
-	"primaryColor": "#090F1B"
+	"showSecondHandLine": true
 }
