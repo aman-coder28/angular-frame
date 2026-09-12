@@ -20,9 +20,9 @@ PanelWindow {
   property bool showDateBadge: settings.showDateBadge
   property bool showSecondHand: settings.showSecondHand
   property bool showSecondHandLine: settings.showSecondHandLine
-  property color bgColor: Colors.accentColor
-  property color accentColor: Colors.bgColor
-  property color primaryColor: Colors.bgColor
+  property color bgColor: Colors.primary
+  property color accentColor: Colors.background
+  property color primaryColor: Colors.background
   property color secondaryColor: "#000000"
   readonly property real ratio: winSize / 320.0
   property real hourThickness: settings.hourThickness // Already a ratio (0.07)

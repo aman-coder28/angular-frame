@@ -27,7 +27,7 @@ ShellRoot {
     }
 
     Rectangle {
-      color: Colors.bgColor
+      color: Colors.background
       height: frameWindow.height
       width: frameWindow.panelW
     }
@@ -42,7 +42,7 @@ ShellRoot {
         joinStyle: ShapePath.MiterJoin
         startX: frame.width - frameWindow.strokeW / 2
         startY: frameWindow.strokeW / 2
-        strokeColor: Colors.accentColor
+        strokeColor: Colors.primary
         strokeStyle: ShapePath.SolidLine
         strokeWidth: frameWindow.strokeW
 
@@ -54,7 +54,7 @@ ShellRoot {
 
       // seal the diagonal cut so the wallpaper doesn't show through
       ShapePath {
-        fillColor: Colors.bgColor
+        fillColor: Colors.background
         startX: frameWindow.panelW
         startY: 0
         strokeColor: "transparent"
@@ -81,7 +81,7 @@ ShellRoot {
         joinStyle: ShapePath.MiterJoin
         startX: frame.width
         startY: 0
-        strokeColor: Colors.accentColor
+        strokeColor: Colors.primary
         strokeStyle: ShapePath.SolidLine
         strokeWidth: frameWindow.strokeW
 
