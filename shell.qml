@@ -1,9 +1,6 @@
 import QtQuick
-import QtQuick.Controls
-import QtQuick.Layouts
 import QtQuick.Shapes
 import Quickshell
-import Quickshell.Io
 import Quickshell.Wayland
 import "widgets/Clock"
 
@@ -41,13 +38,13 @@ ShellRoot {
         fillColor: "transparent"
         joinStyle: ShapePath.MiterJoin
         startX: frame.width - frameWindow.strokeW / 2
-        startY: frameWindow.strokeW / 2
-        strokeColor: Colors.primary
+        startY: 0
+        strokeColor: Colors.background
         strokeStyle: ShapePath.SolidLine
         strokeWidth: frameWindow.strokeW
 
         PathLine {
-          x: frameWindow.panelW + 5
+          x: frameWindow.panelW + 7
           y: frameWindow.strokeW / 2
         }
       }
@@ -60,7 +57,7 @@ ShellRoot {
         strokeColor: "transparent"
 
         PathLine {
-          x: frameWindow.panelW + frameWindow.cutout
+          x: frameWindow.panelW + frameWindow.cutout + 10
           y: 0
         }
 
@@ -80,19 +77,19 @@ ShellRoot {
         fillColor: "transparent"
         joinStyle: ShapePath.MiterJoin
         startX: frame.width
-        startY: 0
+        startY: 6
         strokeColor: Colors.primary
         strokeStyle: ShapePath.SolidLine
         strokeWidth: frameWindow.strokeW
 
         PathLine {
           x: frameWindow.panelW + frameWindow.cutout
-          y: 0
+          y: 6
         }
 
         PathLine {
           x: frameWindow.panelW
-          y: frameWindow.cutout
+          y: frameWindow.cutout + 6
         }
 
         PathLine {
