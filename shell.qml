@@ -44,7 +44,7 @@ ShellRoot {
         strokeWidth: frameWindow.strokeW
 
         PathLine {
-          x: frameWindow.panelW + 7
+          x: frameWindow.panelW + 8
           y: frameWindow.strokeW / 2
         }
       }
@@ -57,7 +57,7 @@ ShellRoot {
         strokeColor: "transparent"
 
         PathLine {
-          x: frameWindow.panelW + frameWindow.cutout + 10
+          x: frameWindow.panelW + frameWindow.cutout + 8
           y: 0
         }
 
@@ -77,19 +77,19 @@ ShellRoot {
         fillColor: "transparent"
         joinStyle: ShapePath.MiterJoin
         startX: frame.width
-        startY: 6
+        startY: 7
         strokeColor: Colors.primary
         strokeStyle: ShapePath.SolidLine
         strokeWidth: frameWindow.strokeW
 
         PathLine {
           x: frameWindow.panelW + frameWindow.cutout
-          y: 6
+          y: 7
         }
 
         PathLine {
           x: frameWindow.panelW
-          y: frameWindow.cutout + 6
+          y: frameWindow.cutout + 7
         }
 
         PathLine {
@@ -101,4 +101,35 @@ ShellRoot {
   }
 
   Clock {}
+
+  PanelWindow {
+    WlrLayershell.layer: WlrLayershell.Background
+    implicitWidth: 215
+    implicitHeight: 253
+    color: "transparent"
+
+    mask: Region {
+      item: sideCal
+    }
+
+    anchors {
+      top: true
+      left: true
+    }
+
+    margins {
+      top: 361
+      left: 20
+    }
+
+    Rectangle {
+      id: sideCal
+
+      anchors.fill: parent
+      color: Colors.surface_container
+      radius: 12
+
+      Calendar {}
+    }
+  }
 }

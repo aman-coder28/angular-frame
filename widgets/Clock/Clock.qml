@@ -18,10 +18,10 @@ PanelWindow {
   property bool showDateBadge: settings.showDateBadge
   property bool showSecondHand: settings.showSecondHand
   property bool showSecondHandLine: settings.showSecondHandLine
-  property color bgColor: Colors.primary
-  property color accentColor: Colors.background
+  property color bgColor: Colors.secondary
+  property color accentColor: Colors.primary
   property color primaryColor: Colors.background
-  property color secondaryColor: "#000000"
+  property color secondaryColor: Colors.surface_bright
   readonly property real ratio: winSize / 320.0
   property real hourThickness: settings.hourThickness // Already a ratio (0.07)
   property real minuteThickness: settings.minuteThickness // Already a ratio (0.05)
@@ -267,7 +267,7 @@ PanelWindow {
           h = 12;
         return (h < 10 ? "0" : "") + h;
       }
-      color: Qt.rgba(primaryColor.r, primaryColor.g, primaryColor.b, 0.15)
+      color: Qt.rgba(primaryColor.r, primaryColor.g, primaryColor.b, 0.30)
       font.pixelSize: winSize * 0.32
       font.weight: Font.Black
       font.family: "sans-serif"
@@ -284,7 +284,7 @@ PanelWindow {
           m = 0;
         return (m < 10 ? "0" : "") + m;
       }
-      color: Qt.rgba(primaryColor.r, primaryColor.g, primaryColor.b, 0.15)
+      color: Qt.rgba(primaryColor.r, primaryColor.g, primaryColor.b, 0.30)
       font.pixelSize: winSize * 0.32
       font.weight: Font.Black
       font.family: "sans-serif"
