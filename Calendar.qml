@@ -7,7 +7,7 @@ Rectangle {
 
   anchors {
     fill: parent
-    margins: 15
+    margins: 11
   }
 
   Column {
@@ -70,7 +70,7 @@ Rectangle {
 
     width: 210
     height: 210
-    spacing: 12
+    spacing: 10
     anchors.fill: parent
 
     // ---- Header: month/year + navigation ----
@@ -121,7 +121,7 @@ Rectangle {
           required property string modelData
 
           width: root.cellW
-          height: 18
+          height: 13
           text: modelData
           color: Colors.secondary
           opacity: 0.6
@@ -149,7 +149,7 @@ Rectangle {
           required property int index
 
           width: root.cellW
-          height: 30
+          height: 25.5
           radius: 180
           color: root.isToday(index) ? Colors.secondary : "transparent"
 

@@ -3,6 +3,7 @@ import QtQuick.Shapes
 import Quickshell
 import Quickshell.Wayland
 import "widgets/Clock"
+import "widgets/Weather"
 
 ShellRoot {
   PanelWindow {
@@ -105,7 +106,7 @@ ShellRoot {
   PanelWindow {
     WlrLayershell.layer: WlrLayershell.Background
     implicitWidth: 215
-    implicitHeight: 253
+    implicitHeight: 195
     color: "transparent"
 
     mask: Region {
@@ -118,8 +119,39 @@ ShellRoot {
     }
 
     margins {
-      top: 361
-      left: 20
+      top: 187
+      left: 18
+    }
+
+    Rectangle {
+      id: sideWeather
+
+      anchors.fill: parent
+      color: Colors.surface_container
+      radius: 12
+
+      Weather {}
+    }
+  }
+
+  PanelWindow {
+    WlrLayershell.layer: WlrLayershell.Background
+    implicitWidth: 215
+    implicitHeight: 215
+    color: "transparent"
+
+    mask: Region {
+      item: sideWeather
+    }
+
+    anchors {
+      top: true
+      left: true
+    }
+
+    margins {
+      top: 398
+      left: 18
     }
 
     Rectangle {
