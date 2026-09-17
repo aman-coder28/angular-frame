@@ -21,7 +21,7 @@ Rectangle {
   // ---- data: Open-Meteo, no API key ----
   function refresh() {
     loading = true;
-    fetch.start();
+    // fetch.start();
   }
 
   function wmoIcon(code) {
