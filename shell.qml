@@ -129,7 +129,7 @@ ShellRoot {
       color: Colors.surface_container
       radius: 12
 
-      Weather {}
+      Calendar {}
     }
   }
 }

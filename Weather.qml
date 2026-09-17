@@ -82,7 +82,8 @@ Rectangle {
   Process {
     id: fetch
 
-    command: ["sh", "-c", "--max-time", "10", "https://api.open-meteo.com/v1/forecast" + "?latitude=" + card.lat + "&longitude=" + card.lon + "&current=temperature_2m,apparent_temperature,weather_code," + "wind_speed_10m,relative_humidity_2m" + "&hourly=temperature_2m,weather_code,precipitation_probability" + "&daily=temperature_2m_max,temperature_2m_min,weather_code," + "precipitation_probability_max,sunrise,sunset" + "&forecast_days=7" + "&timezone=auto" + "&models=knmi_seamless"]
+    running: true
+    command: ["sh", "-c", "curl -sf 'https://api.open-meteo.com/v1/forecast" + "?latitude=" + card.lat + "&longitude=" + card.lon + "&current=temperature_2m,apparent_temperature,weather_code," + "wind_speed_10m,relative_humidity_2m" + "&hourly=temperature_2m,weather_code,precipitation_probability" + "&daily=temperature_2m_max,temperature_2m_min,weather_code," + "precipitation_probability_max,sunrise,sunset" + "&forecast_days=7" + "&timezone=auto'"]
 
     stdout: StdioCollector {
       onStreamFinished: {
@@ -98,17 +99,18 @@ Rectangle {
         card.loading = false;
       }
     }
-
     stderr: StdioCollector {
       onStreamFinished: {
-        if (text !== "") card.lastError = "weather: " + text;
+        if (text !== "")
+          card.lastError = "weather: " + text;
         card.loading = false;
       }
     }
 
     onExited: {
       card.loading = false;
-      if (!card.lastError && card.cur === null) card.lastError = "weather fetch failed";
+      if (!card.lastError && card.cur === null)
+        card.lastError = "weather fetch failed";
     }
   }
 
