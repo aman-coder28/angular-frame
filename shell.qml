@@ -4,6 +4,7 @@ import Quickshell
 import Quickshell.Wayland
 import "widgets/Clock"
 import "widgets/MusicIsland"
+import "widgets/SystemMonitor"
 import "widgets/Weather"
 
 ShellRoot {
@@ -122,7 +123,7 @@ ShellRoot {
     }
 
     margins {
-      top: 187
+      top: 178
       left: 18
     }
 
@@ -153,7 +154,7 @@ ShellRoot {
     }
 
     margins {
-      top: 398
+      top: 386
       left: 18
     }
 
@@ -165,6 +166,37 @@ ShellRoot {
       radius: 12
 
       Calendar {}
+    }
+  }
+
+  PanelWindow {
+    WlrLayershell.layer: WlrLayershell.Background
+    implicitWidth: 215
+    implicitHeight: 113
+    color: "transparent"
+
+    mask: Region {
+      item: systemWidget
+    }
+
+    anchors {
+      top: true
+      left: true
+    }
+
+    margins {
+      top: 613  // Position below calendar
+      left: 18
+    }
+
+    Rectangle {
+      id: systemWidget
+
+      anchors.fill: parent
+      color: Colors.surface_container
+      radius: 12
+
+      SystemMonitor {}
     }
   }
 }
