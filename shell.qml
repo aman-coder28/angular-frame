@@ -3,9 +3,12 @@ import QtQuick.Shapes
 import Quickshell
 import Quickshell.Wayland
 import "widgets/Clock"
+import "widgets/MusicIsland"
 import "widgets/Weather"
 
 ShellRoot {
+  MusicIsland {}
+
   PanelWindow {
     id: frameWindow
 

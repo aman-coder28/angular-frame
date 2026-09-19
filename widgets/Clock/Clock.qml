@@ -41,7 +41,7 @@ PanelWindow {
   WlrLayershell.layer: WlrLayershell.Background
   WlrLayershell.namespace: "material-clock"
   implicitWidth: winSize
-  implicitHeight: winSize
+  implicitHeight: winSize - 10
   color: "transparent"
 
   anchors {
@@ -52,7 +52,11 @@ PanelWindow {
   FileView {
     id: settingsFile
 
+    watchChanges: true
     path: Quickshell.env("HOME") + "/.config/quickshell/angular-frame/widgets/Clock/settings.json"
+
+    onFileChanged: reload()
+    onAdapterUpdated: writeAdapter()
 
     JsonAdapter {
       id: settings

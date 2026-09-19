@@ -139,11 +139,13 @@ Rectangle {
         height: 50
 
         Image {
+          asynchronous: true
+          cache: true
           anchors.horizontalCenter: parent.horizontalCenter
           fillMode: Image.PreserveAspectFit
           width: 50
           height: 50
-          source: "../../assets/" + wmoIcon(cur.weather_code)
+          source: "../../assets/" + wmoIcon(cur.weather_code) + ".svg"
         }
       }
 
@@ -153,7 +155,7 @@ Rectangle {
 
       ColumnLayout {
         width: 80
-        spacing: 6
+        spacing: 4
 
         Text {
           text: cityName
@@ -161,7 +163,7 @@ Rectangle {
           font.weight: Font.Normal
           font.pixelSize: 15
           color: Colors.secondary
-          font.letterSpacing: 1
+          font.letterSpacing: 0.8
         }
 
         Text {
@@ -171,7 +173,7 @@ Rectangle {
           font.pixelSize: 16
           color: Colors.secondary
           Layout.alignment: Qt.AlignRight
-          font.letterSpacing: 0.7
+          font.letterSpacing: 0.8
         }
       }
     }

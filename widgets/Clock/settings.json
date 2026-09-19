@@ -1,7 +1,7 @@
 {
-	"winX": 25,
+	"winX": 31,
 	"winY": 120,
-	"winSize": 180,
+	"winSize": 190,
 	"scallops": 12,
 	"amplitude": 5,
 	"showNumbers": false,
