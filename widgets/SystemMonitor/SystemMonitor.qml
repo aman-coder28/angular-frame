@@ -128,7 +128,7 @@ Rectangle {
     // Gauges Row
     Row {
       width: parent.width
-      spacing: 10
+      spacing: 12
 
       CircularGauge {
         id: cpuGauge
@@ -155,16 +155,10 @@ Rectangle {
 
         value: disk
         label: "Disk"
-        sublabel: (diskTotalGb - diskUsedGb).toFixed(0) + " / " + (diskTotalGb).toFixed(0) + " GB"
+        sublabel: diskUsedGb.toFixed(0) + " / " + diskTotalGb.toFixed(0) + " GB"
         gaugeColor: disk > 0.9 ? Colors.error : disk > 0.7 ? "#ffb74d" : Colors.secondary
         size: 55
       }
-    }
-
-    // Spacer
-    Item {
-      width: parent.width
-      height: 3
     }
   }
 
@@ -245,6 +239,7 @@ Rectangle {
       font.family: "Google Sans"
       font.pixelSize: 12
       font.weight: 600
+      font.letterSpacing: 0.5
     }
 
     // Sublabel (e.g., "4.2 / 16 GB")
@@ -258,6 +253,7 @@ Rectangle {
       font.weight: 500
       font.family: "Google Sans"
       font.pixelSize: 10
+      font.letterSpacing: 0.3
     }
   }
 }

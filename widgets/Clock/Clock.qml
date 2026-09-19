@@ -271,7 +271,7 @@ PanelWindow {
           h = 12;
         return (h < 10 ? "0" : "") + h;
       }
-      color: Qt.rgba(primaryColor.r, primaryColor.g, primaryColor.b, 0.30)
+      color: Qt.rgba(primaryColor.r, primaryColor.g, primaryColor.b, 0.35)
       font.pixelSize: winSize * 0.32
       font.weight: Font.Black
       font.family: "sans-serif"
@@ -288,7 +288,7 @@ PanelWindow {
           m = 0;
         return (m < 10 ? "0" : "") + m;
       }
-      color: Qt.rgba(primaryColor.r, primaryColor.g, primaryColor.b, 0.30)
+      color: Qt.rgba(primaryColor.r, primaryColor.g, primaryColor.b, 0.35)
       font.pixelSize: winSize * 0.32
       font.weight: Font.Black
       font.family: "sans-serif"
@@ -384,10 +384,10 @@ PanelWindow {
       Rectangle {
         visible: showSecondHandLine
         anchors.horizontalCenter: parent.horizontalCenter
-        width: winSize * secondThickness
-        height: hand3Len
+        width: winSize * secondThickness + 1.3
+        height: hand3Len - 4
         radius: width / 2
-        color: Qt.rgba(primaryColor.r, primaryColor.g, primaryColor.b, 0.15)
+        color: Qt.rgba(primaryColor.r, primaryColor.g, primaryColor.b, 0.35)
         y: winSize / 2 - height
         antialiasing: true
       }

@@ -160,7 +160,7 @@ Rectangle {
         Text {
           text: cityName
           font.family: "Google Sans"
-          font.weight: Font.Normal
+          font.weight: 430
           font.pixelSize: 15
           color: Colors.secondary
           font.letterSpacing: 0.8
