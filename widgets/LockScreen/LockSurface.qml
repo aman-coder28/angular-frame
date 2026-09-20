@@ -82,7 +82,7 @@ Rectangle {
     font.family: "Google Sans"
     font.weight: Font.Bold
     font.letterSpacing: 0.7
-    color: Colors.surface_container
+    color: Colors.secondary
     text: {
       const hours = this.date.getHours().toString().padStart(2, '0');
       const minutes = this.date.getMinutes().toString().padStart(2, '0');
@@ -114,6 +114,13 @@ Rectangle {
       TextField {
         id: passwordBox
 
+        property var passwordIcons: ["●", "◆", "✦", "❄", "✻"]
+        property var passwordSequence: []
+
+        function getRandomIcon(): string {
+          return passwordIcons[Math.floor(Math.random() * passwordIcons.length)];
+        }
+
         implicitWidth: 400
         padding: 10
         focus: true
@@ -121,13 +128,14 @@ Rectangle {
         echoMode: TextInput.Password
         inputMethodHints: Qt.ImhSensitiveData
         placeholderText: "Input Password"
-        color: Colors.on_surface
-        placeholderTextColor: Colors.secondary
-        selectionColor: Colors.primary
+        color: Colors.background
+        placeholderTextColor: Colors.background
+        selectionColor: Colors.background
+        passwordCharacter: getRandomIcon()
 
         background: Rectangle {
           radius: 10
-          color: Colors.surface_container
+          color: Colors.secondary
         }
 
         onTextChanged: root.context.currentText = this.text
@@ -145,7 +153,8 @@ Rectangle {
       RoundButton {
         id: myButton
 
-        text: "Unlock"
+        implicitWidth: root.context.unlockInProgress ? 50 : 65
+        implicitHeight: 37
         padding: 10
         radius: 8
         focusPolicy: Qt.NoFocus
@@ -153,23 +162,64 @@ Rectangle {
 
         background: Rectangle {
           radius: myButton.radius
-          color: Colors.surface_container
-        }
-        contentItem: Text {
-          text: myButton.text
-          anchors.centerIn: parent
           color: Colors.secondary
+        }
+        contentItem: Item {
+          anchors.fill: parent
+
+          Text {
+            text: "Unlock"
+            anchors.centerIn: parent
+            color: Colors.background
+            opacity: !root.context.unlockInProgress ? 1 : 0
+          }
+
+          Image {
+            id: spinner
+
+            anchors.centerIn: parent
+            opacity: root.context.unlockInProgress ? 1 : 0
+            source: "assets/spinner.svg"
+            width: 24
+            height: 24
+
+            NumberAnimation on rotation {
+              from: 0
+              to: 360
+              duration: 650
+              loops: Animation.Infinite
+            }
+          }
         }
 
         onClicked: root.context.tryUnlock()
       }
     }
 
-    Label {
-      visible: root.context.showFailure
-      font.family: "Google Sans"
-      text: "Incorrect password, Try Again."
-      color: Colors.surface_container
+    Rectangle {
+      implicitHeight: 38
+      implicitWidth: 250
+      color: Colors.secondary
+      radius: 8
+      opacity: root.context.showFailure ? 1 : 0
+
+      Behavior on opacity {
+        NumberAnimation {
+          duration: 200
+          easing.type: Easing.InOutBounce
+        }
+      }
+
+      Label {
+        anchors.centerIn: parent
+        visible: root.context.showFailure
+        font.family: "Google Sans"
+        text: "Incorrect password, Try Again."
+        color: Colors.background
+        font.weight: Font.Medium
+        font.pixelSize: 15
+        font.letterSpacing: 0.5
+      }
     }
   }
 }
