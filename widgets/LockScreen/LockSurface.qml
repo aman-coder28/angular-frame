@@ -47,9 +47,9 @@ Rectangle {
 
     anchors.fill: parent
     source: wallpaperImage
-    blurEnabled: true
-    blur: 0.9
-    blurMax: 32
+    // blurEnabled: true
+    // blur: 0.4
+    // blurMax: 22
     visible: wallpaperImage.status === Image.Ready
   }
 
@@ -59,7 +59,7 @@ Rectangle {
     anchors.fill: parent
     asynchronous: true
     cache: true
-    source: "fairy-tale.webp"
+    source: root.image.startsWith("file://") ? root.image : root.image ?? "fairy-tale.webp"
     opacity: status === Image.Ready ? 1.0 : 0.0
     smooth: true
     visible: false
@@ -72,12 +72,6 @@ Rectangle {
     }
   }
 
-  Rectangle {
-    anchors.fill: parent
-    color: "#000000"
-    opacity: 0.45
-  }
-
   Label {
     id: clock
 
@@ -86,6 +80,9 @@ Rectangle {
     renderType: Text.NativeRendering
     font.pointSize: 80
     font.family: "Google Sans"
+    font.weight: Font.Bold
+    font.letterSpacing: 0.7
+    color: Colors.surface_container
     text: {
       const hours = this.date.getHours().toString().padStart(2, '0');
       const minutes = this.date.getMinutes().toString().padStart(2, '0');
@@ -98,7 +95,6 @@ Rectangle {
       topMargin: 100
     }
 
-    // updates the clock every second
     Timer {
       running: true
       repeat: true
@@ -109,9 +105,6 @@ Rectangle {
   }
 
   ColumnLayout {
-    // Uncommenting this will make the password entry invisible except on the active monitor.
-    // visible: Window.active
-
     anchors {
       horizontalCenter: parent.horizontalCenter
       top: parent.verticalCenter
@@ -128,23 +121,18 @@ Rectangle {
         echoMode: TextInput.Password
         inputMethodHints: Qt.ImhSensitiveData
         placeholderText: "Input Password"
-        placeholderTextColor: "gray"
-        selectionColor: "blue"
-        color: "black"
+        color: Colors.on_surface
+        placeholderTextColor: Colors.secondary
+        selectionColor: Colors.primary
 
         background: Rectangle {
           radius: 10
-          color: Colors.primary
+          color: Colors.surface_container
         }
 
-        // Update the text in the context when the text in the box changes.
         onTextChanged: root.context.currentText = this.text
-
-        // Try to unlock when enter is pressed.
         onAccepted: root.context.tryUnlock()
 
-        // Update the text in the box to match the text in the context.
-        // This makes sure multiple monitors have the same text.
         Connections {
           function onCurrentTextChanged() {
             passwordBox.text = root.context.currentText;
@@ -160,22 +148,17 @@ Rectangle {
         text: "Unlock"
         padding: 10
         radius: 8
-
-        // don't steal focus from the text box
         focusPolicy: Qt.NoFocus
         enabled: !root.context.unlockInProgress && root.context.currentText !== ""
 
         background: Rectangle {
-          // Preserve rounded corners
           radius: myButton.radius
-
-          // Dynamic colors based on state
-          color: Colors.primary
+          color: Colors.surface_container
         }
         contentItem: Text {
           text: myButton.text
           anchors.centerIn: parent
-          color: "black"
+          color: Colors.secondary
         }
 
         onClicked: root.context.tryUnlock()
@@ -186,7 +169,7 @@ Rectangle {
       visible: root.context.showFailure
       font.family: "Google Sans"
       text: "Incorrect password, Try Again."
-      color: Colors.inverse_surface
+      color: Colors.surface_container
     }
   }
 }
