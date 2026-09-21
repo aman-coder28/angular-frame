@@ -2,7 +2,9 @@ import QtQuick
 import QtQuick.Controls.Fusion
 import QtQuick.Effects
 import QtQuick.Layouts
+import Quickshell
 import Quickshell.Io
+import Quickshell.Widgets
 
 Rectangle {
   id: root
@@ -47,9 +49,9 @@ Rectangle {
 
     anchors.fill: parent
     source: wallpaperImage
-    // blurEnabled: true
-    // blur: 0.4
-    // blurMax: 22
+    blurEnabled: true
+    blur: 0.5
+    blurMax: 32
     visible: wallpaperImage.status === Image.Ready
   }
 
@@ -104,122 +106,185 @@ Rectangle {
     }
   }
 
-  ColumnLayout {
+  Rectangle {
+    id: card
+
+    color: Colors.surface_container
+    radius: 12
+    height: 230
+    width: 380
+
     anchors {
       horizontalCenter: parent.horizontalCenter
       top: parent.verticalCenter
+      margins: 14
     }
 
-    RowLayout {
-      TextField {
-        id: passwordBox
+    ColumnLayout {
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: parent.top
+      Layout.alignment: Qt.AlignCenter
+      anchors.margins: 20
+      spacing: 7
 
-        property var passwordIcons: ["●", "◆", "✦", "❄", "✻"]
-        property var passwordSequence: []
+      ClippingRectangle {
+        implicitWidth: 80
+        implicitHeight: 80
+        radius: 180
+        Layout.alignment: Qt.AlignCenter
 
-        function getRandomIcon(): string {
-          return passwordIcons[Math.floor(Math.random() * passwordIcons.length)];
-        }
-
-        implicitWidth: 400
-        padding: 10
-        focus: true
-        enabled: !root.context.unlockInProgress
-        echoMode: TextInput.Password
-        inputMethodHints: Qt.ImhSensitiveData
-        placeholderText: "Input Password"
-        color: Colors.background
-        placeholderTextColor: Colors.background
-        selectionColor: Colors.background
-        passwordCharacter: getRandomIcon()
-
-        background: Rectangle {
-          radius: 10
-          color: Colors.secondary
-        }
-
-        onTextChanged: root.context.currentText = this.text
-        onAccepted: root.context.tryUnlock()
-
-        Connections {
-          function onCurrentTextChanged() {
-            passwordBox.text = root.context.currentText;
-          }
-
-          target: root.context
+        Image {
+          anchors.fill: parent
+          source: "/var/lib/AccountsService/icons/" + Quickshell.env("USER")
         }
       }
 
-      RoundButton {
-        id: myButton
+      Text {
+        text: Quickshell.env("USER")
+        font.weight: Font.Medium
+        font.family: "Google Sans"
+        font.pixelSize: 18
+        color: Colors.secondary
+        Layout.alignment: Qt.AlignCenter
+        font.letterSpacing: 0.8
+        font.capitalization: Font.Capitalize
+      }
+    }
 
-        implicitWidth: root.context.unlockInProgress ? 50 : 65
-        implicitHeight: 37
-        padding: 10
-        radius: 8
-        focusPolicy: Qt.NoFocus
-        enabled: !root.context.unlockInProgress && root.context.currentText !== ""
+    ColumnLayout {
+      anchors.bottom: parent.bottom
+      anchors.left: parent.left
+      anchors.right: parent.right
 
-        background: Rectangle {
-          radius: myButton.radius
-          color: Colors.secondary
+      anchors {
+        // fill: parent
+        margins: 14
+      }
+
+      RowLayout {
+        spacing: 5
+
+        anchors {
+          // fill: parent
+          margins: 14
         }
-        contentItem: Item {
-          anchors.fill: parent
 
-          Text {
-            text: "Unlock"
-            anchors.centerIn: parent
-            color: Colors.background
-            opacity: !root.context.unlockInProgress ? 1 : 0
+        TextField {
+          id: passwordBox
+
+          property var passwordIcons: ["●", "◆", "✦", "❄", "✻"]
+          property var passwordSequence: []
+
+          function getRandomIcon(): string {
+            return passwordIcons[Math.floor(Math.random() * passwordIcons.length)];
           }
 
-          Image {
-            id: spinner
+          Layout.fillWidth: true
+          padding: 10
+          focus: true
+          enabled: !root.context.unlockInProgress
+          echoMode: TextInput.Password
+          inputMethodHints: Qt.ImhSensitiveData
+          placeholderText: "Input Password"
+          color: Colors.background
+          placeholderTextColor: Colors.background
+          selectionColor: Colors.background
+          passwordCharacter: getRandomIcon()
 
-            anchors.centerIn: parent
-            opacity: root.context.unlockInProgress ? 1 : 0
-            source: "assets/spinner.svg"
-            width: 24
-            height: 24
+          background: Rectangle {
+            radius: 10
+            color: Colors.secondary
+          }
 
-            NumberAnimation on rotation {
-              from: 0
-              to: 360
-              duration: 650
-              loops: Animation.Infinite
+          onTextChanged: root.context.currentText = this.text
+          onAccepted: root.context.tryUnlock()
+
+          Connections {
+            function onCurrentTextChanged() {
+              passwordBox.text = root.context.currentText;
+            }
+
+            target: root.context
+          }
+        }
+
+        RoundButton {
+          id: myButton
+
+          implicitWidth: 40
+          implicitHeight: 37
+          padding: 10
+          radius: 8
+          focusPolicy: Qt.NoFocus
+          enabled: !root.context.unlockInProgress && root.context.currentText !== ""
+
+          background: Rectangle {
+            radius: myButton.radius
+            color: Colors.secondary
+          }
+          contentItem: Item {
+            anchors.fill: parent
+
+            Image {
+              id: arrow
+
+              anchors.centerIn: parent
+              opacity: !root.context.unlockInProgress ? 1 : 0
+              source: "assets/arrow.svg"
+              width: 20
+              height: 20
+            }
+
+            Image {
+              id: spinner
+
+              anchors.centerIn: parent
+              opacity: root.context.unlockInProgress ? 1 : 0
+              source: "assets/spinner.svg"
+              width: 20
+              height: 20
+
+              NumberAnimation on rotation {
+                from: 0
+                to: 360
+                duration: 650
+                loops: Animation.Infinite
+              }
             }
           }
-        }
 
-        onClicked: root.context.tryUnlock()
+          onClicked: root.context.tryUnlock()
+        }
+      }
+    }
+  }
+
+  Rectangle {
+    implicitHeight: 38
+    implicitWidth: 250
+    color: Colors.secondary
+    radius: 8
+    opacity: root.context.showFailure ? 1 : 0
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.bottom: parent.bottom
+    anchors.bottomMargin: 90
+
+    Behavior on opacity {
+      NumberAnimation {
+        duration: 200
+        easing.type: Easing.InOutBounce
       }
     }
 
-    Rectangle {
-      implicitHeight: 38
-      implicitWidth: 250
-      color: Colors.secondary
-      radius: 8
-      opacity: root.context.showFailure ? 1 : 0
-
-      Behavior on opacity {
-        NumberAnimation {
-          duration: 200
-          easing.type: Easing.InOutBounce
-        }
-      }
-
-      Label {
-        anchors.centerIn: parent
-        visible: root.context.showFailure
-        font.family: "Google Sans"
-        text: "Incorrect password, Try Again."
-        color: Colors.background
-        font.weight: Font.Medium
-        font.pixelSize: 15
-        font.letterSpacing: 0.5
-      }
+    Label {
+      anchors.centerIn: parent
+      visible: root.context.showFailure
+      font.family: "Google Sans"
+      text: "Incorrect password, Try Again."
+      color: Colors.background
+      font.weight: Font.Medium
+      font.pixelSize: 15
+      font.letterSpacing: 0.5
     }
   }
 }

@@ -26,23 +26,23 @@ The shell renders multiple background layers on Wayland:
 
 ## Files
 
-| File | Purpose |
-|---|---|
-| `shell.qml` | Main entry point. Defines all panel windows and the angular frame shape. |
-| `Colors.qml` | Singleton reading Material Design 3 color tokens from Noctalia JSON. |
-| `Calendar.qml` | Monthly calendar with prev/next navigation and today highlight. |
-| `widgets/Clock/Clock.qml` | Scalloped analog clock with hands, ticks, day label, digital overlay. |
-| `widgets/Clock/Colors.qml` | Clock-specific color singleton. |
-| `widgets/Clock/settings.json` | Clock configuration (size, scallops, amplitude, toggles, hand lengths). |
-| `widgets/Weather/Weather.qml` | Current weather + 3-day forecast via Open-Meteo API. |
-| `widgets/Weather/ForcastRow.qml` | Forecast row sub-component (day, icon, temp). |
-| `widgets/SystemMonitor/SystemMonitor.qml` | CPU/RAM/Disk circular gauges with 2s polling. |
-| `widgets/MusicIsland/MusicIsland.qml` | Collapsed/expanded music pill with hover animation. |
-| `widgets/MusicIsland/Music.qml` | Singleton wrapping the MPRIS player API. |
-| `widgets/MusicIsland/MusicControl.qml` | Expanded controls (seek slider, transport buttons). |
-| `widgets/MusicIsland/MusicBars.qml` | Animated audio visualizer bars. |
-| `widgets/MusicIsland/Cava.qml` | Spawns Cava process and parses output into bar levels. |
-| `assets/` | SVG weather icons (clear, rain, snow, etc.). |
+| File                                      | Purpose                                                                  |
+| ----------------------------------------- | ------------------------------------------------------------------------ |
+| `shell.qml`                               | Main entry point. Defines all panel windows and the angular frame shape. |
+| `Colors.qml`                              | Singleton reading Material Design 3 color tokens from Noctalia JSON.     |
+| `Calendar.qml`                            | Monthly calendar with prev/next navigation and today highlight.          |
+| `widgets/Clock/Clock.qml`                 | Scalloped analog clock with hands, ticks, day label, digital overlay.    |
+| `widgets/Clock/Colors.qml`                | Clock-specific color singleton.                                          |
+| `widgets/Clock/settings.json`             | Clock configuration (size, scallops, amplitude, toggles, hand lengths).  |
+| `widgets/Weather/Weather.qml`             | Current weather + 3-day forecast via Open-Meteo API.                     |
+| `widgets/Weather/ForcastRow.qml`          | Forecast row sub-component (day, icon, temp).                            |
+| `widgets/SystemMonitor/SystemMonitor.qml` | CPU/RAM/Disk circular gauges with 2s polling.                            |
+| `widgets/MusicIsland/MusicIsland.qml`     | Collapsed/expanded music pill with hover animation.                      |
+| `widgets/MusicIsland/Music.qml`           | Singleton wrapping the MPRIS player API.                                 |
+| `widgets/MusicIsland/MusicControl.qml`    | Expanded controls (seek slider, transport buttons).                      |
+| `widgets/MusicIsland/MusicBars.qml`       | Animated audio visualizer bars.                                          |
+| `widgets/MusicIsland/Cava.qml`            | Spawns Cava process and parses output into bar levels.                   |
+| `assets/`                                 | SVG weather icons (clear, rain, snow, etc.).                             |
 
 ## Noctalia v5 Color Integration
 
@@ -73,7 +73,6 @@ output_path = "$XDG_CONFIG_HOME/quickshell/noctalia-colors.json"
 ```
 
 Noctalia renders user templates every time the palette/theme changes, and it skips rewriting the file when nothing changed so you won't get spurious reloads.
-
 
 ## Dependencies
 

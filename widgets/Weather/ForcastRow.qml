@@ -14,7 +14,7 @@ Row {
     for (let i = 0; i < daily.time.length; i++) {
       model.push({
         day: dayAbbrev(daily.time[i]),
-        icon: "../../assets/" + wmoIcon(daily.weather_code[i]) + ".svg",
+        icon: "../../assets/" + Service.wmoIcon(daily.weather_code[i]) + ".svg",
         number: Math.round(daily.temperature_2m_max[i]) + "°"
       });
     }
@@ -25,34 +25,6 @@ Row {
   function dayAbbrev(dateStr) {
     const [y, m, d] = dateStr.split("-").map(Number);
     return Qt.formatDate(new Date(y, m - 1, d), "ddd");
-  }
-
-  function wmoIcon(code) {
-    if (code === 0)
-      return "clear-day";
-    if (code === 1 || code === 2)
-      return "partly-cloudy-day";
-    if (code === 3)
-      return "overcast-day";
-    if (code === 45 || code === 48)
-      return "fog-day";
-    if ([51, 53, 55].includes(code))
-      return "drizzle";
-    if ([56, 57, 66, 67].includes(code))
-      return "sleet";
-    if ([61, 63, 65].includes(code))
-      return "rain";
-    if ([71, 73, 75, 77].includes(code))
-      return "snow";
-    if ([80, 81, 82].includes(code))
-      return "rain";
-    if ([85, 86].includes(code))
-      return "snow";
-    if (code === 95)
-      return "thunderstorms-day";
-    if ([96, 99].includes(code))
-      return "thunderstorms-day-rain";
-    return "not-available";
   }
 
   spacing: 7

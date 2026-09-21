@@ -22,15 +22,15 @@ Music Island renders a compact, pill-shaped music bar at the top of your screen.
 
 ## Files
 
-| File | Purpose |
-|---|---|
-| `shell.qml` | Main entry point. Defines the panel window, collapsed/expanded states, and carousel animation. |
-| `Music.qml` | Singleton wrapping the MPRIS player API. Tracks active player, title, artist, album art, position, and provides helper functions. |
-| `MusicControl.qml` | Expanded view with album art, title/artist, seek slider, and transport buttons. |
-| `MusicBars.qml` | Animated audio visualizer bars driven by Cava data. |
-| `Colors.qml` | Singleton that reads Material Design 3 color tokens from `noctalia-colors.json`. |
-| `Cava.qml` | Singleton that spawns the Cava process and parses raw ASCII output into bar levels. |
-| `assets/` | SVG icons for play, pause, repeat, shuffle, skip next, and skip previous. |
+| File               | Purpose                                                                                                                           |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| `shell.qml`        | Main entry point. Defines the panel window, collapsed/expanded states, and carousel animation.                                    |
+| `Music.qml`        | Singleton wrapping the MPRIS player API. Tracks active player, title, artist, album art, position, and provides helper functions. |
+| `MusicControl.qml` | Expanded view with album art, title/artist, seek slider, and transport buttons.                                                   |
+| `MusicBars.qml`    | Animated audio visualizer bars driven by Cava data.                                                                               |
+| `Colors.qml`       | Singleton that reads Material Design 3 color tokens from `noctalia-colors.json`.                                                  |
+| `Cava.qml`         | Singleton that spawns the Cava process and parses raw ASCII output into bar levels.                                               |
+| `assets/`          | SVG icons for play, pause, repeat, shuffle, skip next, and skip previous.                                                         |
 
 ## Noctalia v5 Color Integration
 

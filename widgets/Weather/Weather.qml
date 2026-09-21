@@ -1,125 +1,18 @@
 import QtQuick
 import QtQuick.Layouts
-import Quickshell.Io
 import "../.."
 
 Rectangle {
   id: card
-
-  // ---- config ----
-  property real lat: 9.03
-  property real lon: 38.74
-  property string cityName: "Addis Ababa"
-
-  // ---- state ----
-  property var cur: null
-  property var daily: null
-  property bool loading: false
-  property string lastError: ""
-  readonly property bool loaded: cur !== null && lastError === ""
-
-  // ---- data: Open-Meteo, no API key ----
-  function refresh() {
-    loading = true;
-    // fetch.start();
-  }
-
-  function wmoIcon(code) {
-    if (code === 0)
-      return "clear-day";
-    if (code === 1 || code === 2)
-      return "partly-cloudy-day";
-    if (code === 3)
-      return "overcast-day";
-    if (code === 45 || code === 48)
-      return "fog-day";
-    if ([51, 53, 55].includes(code))
-      return "drizzle";
-    if ([56, 57, 66, 67].includes(code))
-      return "sleet";
-    if ([61, 63, 65].includes(code))
-      return "rain";
-    if ([71, 73, 75, 77].includes(code))
-      return "snow";
-    if ([80, 81, 82].includes(code))
-      return "rain";
-    if ([85, 86].includes(code))
-      return "snow";
-    if (code === 95)
-      return "thunderstorms-day";
-    if ([96, 99].includes(code))
-      return "thunderstorms-day-rain";
-    return "not-available";
-  }
-
-  function descForCode(code) {
-    if (code === 0)
-      return "Clear";
-    if (code <= 2)
-      return "Partly cloudy";
-    if (code === 3)
-      return "Overcast";
-    if (code === 45 || code === 48)
-      return "Fog";
-    if (code <= 57)
-      return "Drizzle";
-    if (code <= 67)
-      return "Rain";
-    if (code <= 77)
-      return "Snow";
-    if (code <= 82)
-      return "Showers";
-    return "Thunderstorm";
-  }
 
   color: Colors.surface_container
   radius: 12
   height: 180
   width: parent.width
 
-  Component.onCompleted: refresh()
-
-  Timer {
-    interval: 21600
-    running: true
-    repeat: true
-
-    onTriggered: card.refresh()
-  }
-
-  Process {
-    id: fetch
-
-    running: true
-    command: ["sh", "-c", "curl -sf 'https://api.open-meteo.com/v1/forecast" + "?latitude=" + card.lat + "&longitude=" + card.lon + "&current=temperature_2m,weather_code" + "&daily=temperature_2m_max,temperature_2m_min,weather_code," + "&forecast_days=3" + "&timezone=auto'"]
-
-    stdout: StdioCollector {
-      onStreamFinished: {
-        try {
-          const j = JSON.parse(text);
-          card.cur = j.current;
-          card.daily = j.daily;
-
-          card.lastError = "";
-        } catch (e) {
-          card.lastError = "weather fetch failed";
-        }
-        card.loading = false;
-      }
-    }
-    stderr: StdioCollector {
-      onStreamFinished: {
-        if (text !== "")
-          card.lastError = "weather: " + text;
-        card.loading = false;
-      }
-    }
-
-    onExited: {
-      card.loading = false;
-      if (!card.lastError && card.cur === null)
-        card.lastError = "weather fetch failed";
-    }
+  Component.onCompleted: {
+    Service.loadCache();
+    Service.refresh();
   }
 
   ColumnLayout {
@@ -127,7 +20,7 @@ Rectangle {
 
     anchors {
       fill: parent
-      margins: 16
+      margins: 12
     }
 
     RowLayout {
@@ -145,7 +38,7 @@ Rectangle {
           fillMode: Image.PreserveAspectFit
           width: 50
           height: 50
-          source: "../../assets/" + wmoIcon(cur.weather_code) + ".svg"
+          source: "../../assets/" + Service.wmoIcon(Service.cur.weather_code) + ".svg"
         }
       }
 
@@ -158,7 +51,7 @@ Rectangle {
         spacing: 4
 
         Text {
-          text: cityName
+          text: Service.loaded ? Service.cityName : Service.cached ? Service.cityName + " ⚡" : "..."
           font.family: "Google Sans"
           font.weight: 430
           font.pixelSize: 15
@@ -167,13 +60,14 @@ Rectangle {
         }
 
         Text {
-          text: card.loaded ? descForCode(cur.weather_code) : "..."
+          text: Service.loaded || Service.cached ? Service.wmoIcon(Service.cur.weather_code).replace(/-/, " ") : "..."
           font.weight: Font.Medium
           font.family: "Google Sans"
           font.pixelSize: 16
           color: Colors.secondary
           Layout.alignment: Qt.AlignRight
           font.letterSpacing: 0.8
+          font.capitalization: Font.Capitalize
         }
       }
     }
@@ -186,7 +80,7 @@ Rectangle {
         spacing: 4
 
         Text {
-          text: card.loaded ? Math.round(cur.temperature_2m) + "°" : "—"
+          text: Service.loaded || Service.cached ? Math.round(Service.cur.temperature_2m) + "°" : "—"
           font.family: "Google Sans"
           font.weight: Font.Medium
           font.pixelSize: 50
@@ -196,7 +90,7 @@ Rectangle {
         }
 
         Text {
-          text: card.loaded && daily ? " " + Math.round(daily.temperature_2m_max[0]) + "°  " + Math.round(daily.temperature_2m_min[0]) + "°" : "°°°"
+          text: Service.loaded && Service.daily || Service.cached ? " " + Math.round(Service.daily.temperature_2m_max[0]) + "°  " + Math.round(Service.daily.temperature_2m_min[0]) + "°" : "°°°"
           color: Colors.secondary
           font.weight: Font.Medium
           font.family: "Google Sans"
@@ -210,13 +104,13 @@ Rectangle {
       }
 
       Rectangle {
-        width: 90
+        width: 100
         height: 80
         color: "transparent"
         Layout.alignment: Qt.AlignLeft
 
         ForcastRow {
-          forecastData: card.daily
+          forecastData: Service.daily
         }
       }
     }

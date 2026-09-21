@@ -124,7 +124,7 @@ ShellRoot {
 
     margins {
       top: 178
-      left: 18
+      left: 20
     }
 
     Rectangle {
@@ -155,7 +155,7 @@ ShellRoot {
 
     margins {
       top: 386
-      left: 18
+      left: 20
     }
 
     Rectangle {
@@ -185,8 +185,8 @@ ShellRoot {
     }
 
     margins {
-      top: 613  // Position below calendar
-      left: 18
+      top: 613
+      left: 20
     }
 
     Rectangle {
