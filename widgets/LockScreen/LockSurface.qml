@@ -80,7 +80,7 @@ Rectangle {
     font.family: "Google Sans"
     font.weight: Font.Bold
     font.letterSpacing: 0.7
-    color: Colors.surface_bright
+    color: Qt.rgba(Colors.on_surface.r, Colors.on_surface.g, Colors.on_surface.a, 0.7)
     text: {
       const hours = this.date.getHours().toString().padStart(2, '0');
       const minutes = this.date.getMinutes().toString().padStart(2, '0');
