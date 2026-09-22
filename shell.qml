@@ -62,13 +62,13 @@ ShellRoot {
         strokeColor: "transparent"
 
         PathLine {
-          x: frameWindow.panelW + frameWindow.cutout + 8
+          x: frameWindow.panelW + frameWindow.cutout + 12
           y: 0
         }
 
         PathLine {
           x: frameWindow.panelW
-          y: frameWindow.cutout
+          y: frameWindow.cutout + 12
         }
 
         PathLine {

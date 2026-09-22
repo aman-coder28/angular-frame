@@ -80,7 +80,7 @@ Rectangle {
     font.family: "Google Sans"
     font.weight: Font.Bold
     font.letterSpacing: 0.7
-    color: Colors.tertiary
+    color: Colors.surface_bright
     text: {
       const hours = this.date.getHours().toString().padStart(2, '0');
       const minutes = this.date.getMinutes().toString().padStart(2, '0');
