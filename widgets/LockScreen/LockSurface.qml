@@ -44,16 +44,16 @@ Rectangle {
     onClicked: context.unlocked()
   }
 
-  // MultiEffect {
-  //   id: wallpaperImageBlur
+  MultiEffect {
+    id: wallpaperImageBlur
 
-  //   anchors.fill: parent
-  //   source: wallpaperImage
-  //   blurEnabled: true
-  //   blur: 0.5
-  //   blurMax: 32
-  //   visible: wallpaperImage.status === Image.Ready
-  // }
+    anchors.fill: parent
+    source: wallpaperImage
+    blurEnabled: true
+    blur: 0.5
+    blurMax: 32
+    visible: wallpaperImage.status === Image.Ready
+  }
 
   Image {
     id: wallpaperImage
