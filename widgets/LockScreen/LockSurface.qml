@@ -44,16 +44,16 @@ Rectangle {
     onClicked: context.unlocked()
   }
 
-  MultiEffect {
-    id: wallpaperImageBlur
+  // MultiEffect {
+  //   id: wallpaperImageBlur
 
-    anchors.fill: parent
-    source: wallpaperImage
-    blurEnabled: true
-    blur: 0.5
-    blurMax: 32
-    visible: wallpaperImage.status === Image.Ready
-  }
+  //   anchors.fill: parent
+  //   source: wallpaperImage
+  //   blurEnabled: true
+  //   blur: 0.5
+  //   blurMax: 32
+  //   visible: wallpaperImage.status === Image.Ready
+  // }
 
   Image {
     id: wallpaperImage
@@ -64,7 +64,8 @@ Rectangle {
     source: root.image.startsWith("file://") ? root.image : root.image ?? "fairy-tale.webp"
     opacity: status === Image.Ready ? 1.0 : 0.0
     smooth: true
-    visible: false
+
+    // visible: false
 
     Behavior on opacity {
       NumberAnimation {
@@ -111,7 +112,7 @@ Rectangle {
 
     color: Colors.surface_container
     radius: 12
-    height: 230
+    height: 220
     width: 380
 
     anchors {
@@ -124,8 +125,8 @@ Rectangle {
       anchors.horizontalCenter: parent.horizontalCenter
       anchors.top: parent.top
       Layout.alignment: Qt.AlignCenter
-      anchors.margins: 20
-      spacing: 7
+      anchors.margins: 26
+      spacing: 16
 
       ClippingRectangle {
         implicitWidth: 80
@@ -267,7 +268,7 @@ Rectangle {
     opacity: root.context.showFailure ? 1 : 0
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.bottom: parent.bottom
-    anchors.bottomMargin: 90
+    anchors.bottomMargin: 107
 
     Behavior on opacity {
       NumberAnimation {
