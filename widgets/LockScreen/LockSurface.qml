@@ -1,6 +1,6 @@
+import Qt5Compat.GraphicalEffects
 import QtQuick
 import QtQuick.Controls.Fusion
-import QtQuick.Effects
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
@@ -44,15 +44,11 @@ Rectangle {
     onClicked: context.unlocked()
   }
 
-  MultiEffect {
-    id: wallpaperImageBlur
-
+  FastBlur {
     anchors.fill: parent
     source: wallpaperImage
-    blurEnabled: true
-    blur: 0.5
-    blurMax: 32
-    visible: wallpaperImage.status === Image.Ready
+    cached: true
+    radius: 12
   }
 
   Image {
@@ -64,8 +60,7 @@ Rectangle {
     source: root.image.startsWith("file://") ? root.image : root.image ?? "fairy-tale.webp"
     opacity: status === Image.Ready ? 1.0 : 0.0
     smooth: true
-
-    // visible: false
+    visible: false
 
     Behavior on opacity {
       NumberAnimation {
@@ -85,7 +80,7 @@ Rectangle {
     font.family: "Google Sans"
     font.weight: Font.Bold
     font.letterSpacing: 0.7
-    color: Colors.secondary
+    color: Colors.tertiary
     text: {
       const hours = this.date.getHours().toString().padStart(2, '0');
       const minutes = this.date.getMinutes().toString().padStart(2, '0');
@@ -110,10 +105,16 @@ Rectangle {
   Rectangle {
     id: card
 
-    color: Colors.surface_container
+    opacity: 0.9
+    color: Colors.on_secondary
     radius: 12
     height: 220
     width: 380
+
+    border {
+      color: Colors.on_secondary_fixed_variant
+      width: 1
+    }
 
     anchors {
       horizontalCenter: parent.horizontalCenter
@@ -145,7 +146,7 @@ Rectangle {
         font.weight: Font.Medium
         font.family: "Google Sans"
         font.pixelSize: 18
-        color: Colors.secondary
+        color: Colors.on_background
         Layout.alignment: Qt.AlignCenter
         font.letterSpacing: 0.8
         font.capitalization: Font.Capitalize
