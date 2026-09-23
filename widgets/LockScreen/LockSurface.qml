@@ -15,7 +15,14 @@ Rectangle {
   function getGreeting() {
     const hour = new Date().getHours();
 
-    return hour < 12 ? "Good Morning, " : hour < 18 ? "Good Morning, " : "Good Evening, ";
+    if (hour < 5)
+      return "Good Night, ";
+    if (hour < 12)
+      return "Good Morning, ";
+    if (hour < 18)
+      return "Good Afternoon, ";
+
+    return "Good Evening, ";
   }
 
   color: "transparent"
@@ -63,7 +70,7 @@ Rectangle {
     anchors.fill: parent
     asynchronous: true
     cache: true
-    source: root.image.startsWith("file://") ? root.image : root.image ?? "fairy-tale.webp"
+    source: root.image !== "" ? root.image : "fairy-tale.webp"
     opacity: status === Image.Ready ? 1.0 : 0.0
     smooth: true
     visible: false
@@ -83,75 +90,76 @@ Rectangle {
     Layout.alignment: Qt.AlignCenter
     spacing: 2
 
-    Text {
-      id: date
+    Item {
+      Layout.alignment: Qt.AlignHCenter
+      implicitWidth: date.implicitWidth
+      implicitHeight: date.implicitHeight
 
-      property date myDate: new Date()
+      Text {
+        id: date
 
-      renderType: Text.NativeRendering
-      font.pointSize: 17
-      font.family: "Google Sans"
-      font.weight: Font.DemiBold
-      font.letterSpacing: 0.7
-      color: Colors.tertiary
-      text: myDate.toLocaleDateString(Qt.locale(), "dddd, MMM d")
-      visible: false
+        property date myDate: new Date()
 
-      anchors {
-        horizontalCenter: parent.horizontalCenter
-        top: parent.top
+        renderType: Text.NativeRendering
+        font.pointSize: 17
+        font.family: "Google Sans"
+        font.weight: Font.DemiBold
+        font.letterSpacing: 0.7
+        color: Colors.tertiary
+        text: myDate.toLocaleDateString(Qt.locale(), "dddd, MMM d")
+        visible: false
+      }
+
+      Glow {
+        anchors.fill: date
+        radius: 2
+        samples: 17
+        color: Colors.secondary
+        source: date
+        transparentBorder: true
       }
     }
 
-    Glow {
-      anchors.fill: date
-      radius: 2
-      samples: 17
-      color: Colors.secondary
-      source: date
-      transparentBorder: true
-    }
+    Item {
+      Layout.alignment: Qt.AlignHCenter
+      implicitWidth: clock.implicitWidth
+      implicitHeight: clock.implicitHeight
 
-    Text {
-      id: clock
+      Text {
+        id: clock
 
-      property var date: new Date()
+        property var date: new Date()
 
-      renderType: Text.NativeRendering
-      font.pointSize: 80
-      font.family: "Google Sans"
-      font.weight: Font.DemiBold
-      font.letterSpacing: 0.7
-      color: Colors.tertiary
-      text: {
-        const hours = this.date.getHours().toString().padStart(2, '0');
-        const minutes = this.date.getMinutes().toString().padStart(2, '0');
-        return `${hours}:${minutes}`;
+        renderType: Text.NativeRendering
+        font.pointSize: 80
+        font.family: "Google Sans"
+        font.weight: Font.DemiBold
+        font.letterSpacing: 0.7
+        color: Colors.tertiary
+        text: {
+          const hours = this.date.getHours().toString().padStart(2, '0');
+          const minutes = this.date.getMinutes().toString().padStart(2, '0');
+          return `${hours}:${minutes}`;
+        }
+        visible: false
+
+        Timer {
+          running: true
+          repeat: true
+          interval: 1000
+
+          onTriggered: clock.date = new Date()
+        }
       }
-      visible: false
 
-      anchors {
-        horizontalCenter: parent.horizontalCenter
-        top: parent.top
-        topMargin: 16
+      Glow {
+        anchors.fill: clock
+        radius: 5
+        samples: 27
+        color: Colors.secondary
+        source: clock
+        transparentBorder: true
       }
-
-      Timer {
-        running: true
-        repeat: true
-        interval: 1000
-
-        onTriggered: clock.date = new Date()
-      }
-    }
-
-    Glow {
-      anchors.fill: clock
-      radius: 5
-      samples: 27
-      color: Colors.secondary
-      source: clock
-      transparentBorder: true
     }
   }
 
@@ -288,7 +296,14 @@ Rectangle {
               source: "assets/arrow.svg"
               width: 20
               height: 20
-              colorSpace: Colors.background
+              visible: false
+            }
+
+            ColorOverlay {
+              anchors.fill: arrow
+              source: arrow
+              color: Colors.background
+              visible: !root.context.unlockInProgress ? 1 : 0
             }
 
             Image {
@@ -299,7 +314,7 @@ Rectangle {
               source: "assets/spinner.svg"
               width: 20
               height: 20
-              colorSpace: Colors.background
+              visible: false
 
               NumberAnimation on rotation {
                 from: 0
@@ -307,6 +322,13 @@ Rectangle {
                 duration: 650
                 loops: Animation.Infinite
               }
+            }
+
+            ColorOverlay {
+              anchors.fill: spinner
+              source: spinner
+              color: Colors.background
+              visible: root.context.unlockInProgress ? 1 : 0
             }
           }
 
