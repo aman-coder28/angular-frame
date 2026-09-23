@@ -12,6 +12,12 @@ Rectangle {
   required property LockContext context
   property string image: ""
 
+  function getGreeting() {
+    const hour = new Date().getHours();
+
+    return hour < 12 ? "Good Morning, " : hour < 18 ? "Good Morning, " : "Good Evening, ";
+  }
+
   color: "transparent"
   anchors.fill: parent
 
@@ -41,7 +47,7 @@ Rectangle {
   Button {
     text: "Its not working, let me out"
 
-    onClicked: context.unlocked()
+    onClicked: root.context.unlocked()
   }
 
   FastBlur {
@@ -70,55 +76,103 @@ Rectangle {
     }
   }
 
-  Label {
-    id: clock
+  ColumnLayout {
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.top: parent.top
+    anchors.topMargin: 60
+    Layout.alignment: Qt.AlignCenter
+    spacing: 2
 
-    property var date: new Date()
+    Text {
+      id: date
 
-    renderType: Text.NativeRendering
-    font.pointSize: 80
-    font.family: "Google Sans"
-    font.weight: Font.Bold
-    font.letterSpacing: 0.7
-    color: Qt.rgba(Colors.on_surface.r, Colors.on_surface.g, Colors.on_surface.a, 0.7)
-    text: {
-      const hours = this.date.getHours().toString().padStart(2, '0');
-      const minutes = this.date.getMinutes().toString().padStart(2, '0');
-      return `${hours}:${minutes}`;
+      property date myDate: new Date()
+
+      renderType: Text.NativeRendering
+      font.pointSize: 17
+      font.family: "Google Sans"
+      font.weight: Font.DemiBold
+      font.letterSpacing: 0.7
+      color: Colors.tertiary
+      text: myDate.toLocaleDateString(Qt.locale(), "dddd, MMM d")
+      visible: false
+
+      anchors {
+        horizontalCenter: parent.horizontalCenter
+        top: parent.top
+      }
     }
 
-    anchors {
-      horizontalCenter: parent.horizontalCenter
-      top: parent.top
-      topMargin: 100
+    Glow {
+      anchors.fill: date
+      radius: 2
+      samples: 17
+      color: Colors.secondary
+      source: date
+      transparentBorder: true
     }
 
-    Timer {
-      running: true
-      repeat: true
-      interval: 1000
+    Text {
+      id: clock
 
-      onTriggered: clock.date = new Date()
+      property var date: new Date()
+
+      renderType: Text.NativeRendering
+      font.pointSize: 80
+      font.family: "Google Sans"
+      font.weight: Font.DemiBold
+      font.letterSpacing: 0.7
+      color: Colors.tertiary
+      text: {
+        const hours = this.date.getHours().toString().padStart(2, '0');
+        const minutes = this.date.getMinutes().toString().padStart(2, '0');
+        return `${hours}:${minutes}`;
+      }
+      visible: false
+
+      anchors {
+        horizontalCenter: parent.horizontalCenter
+        top: parent.top
+        topMargin: 16
+      }
+
+      Timer {
+        running: true
+        repeat: true
+        interval: 1000
+
+        onTriggered: clock.date = new Date()
+      }
+    }
+
+    Glow {
+      anchors.fill: clock
+      radius: 5
+      samples: 27
+      color: Colors.secondary
+      source: clock
+      transparentBorder: true
     }
   }
 
   Rectangle {
     id: card
 
-    opacity: 0.9
-    color: Colors.on_secondary
+    opacity: 0.8
+    color: Colors.on_primary_fixed
     radius: 12
-    height: 220
+    height: 210
     width: 380
 
     border {
-      color: Colors.on_secondary_fixed_variant
+      color: Colors.on_primary_fixed_variant
       width: 1
     }
 
     anchors {
       horizontalCenter: parent.horizontalCenter
-      top: parent.verticalCenter
+      bottom: parent.bottom
+      bottomMargin: 75
       margins: 14
     }
 
@@ -127,11 +181,11 @@ Rectangle {
       anchors.top: parent.top
       Layout.alignment: Qt.AlignCenter
       anchors.margins: 26
-      spacing: 16
+      spacing: 12
 
       ClippingRectangle {
-        implicitWidth: 80
-        implicitHeight: 80
+        implicitWidth: 70
+        implicitHeight: 70
         radius: 180
         Layout.alignment: Qt.AlignCenter
 
@@ -146,10 +200,11 @@ Rectangle {
         font.weight: Font.Medium
         font.family: "Google Sans"
         font.pixelSize: 18
-        color: Colors.on_background
+        color: Colors.secondary
         Layout.alignment: Qt.AlignCenter
-        font.letterSpacing: 0.8
+        font.letterSpacing: 0.9
         font.capitalization: Font.Capitalize
+        layer.enabled: true
       }
     }
 
@@ -159,7 +214,6 @@ Rectangle {
       anchors.right: parent.right
 
       anchors {
-        // fill: parent
         margins: 14
       }
 
@@ -167,14 +221,13 @@ Rectangle {
         spacing: 5
 
         anchors {
-          // fill: parent
           margins: 14
         }
 
         TextField {
           id: passwordBox
 
-          property var passwordIcons: ["●", "◆", "✦", "❄", "✻"]
+          property var passwordIcons: ["●", "◆", "❄"]
           property var passwordSequence: []
 
           function getRandomIcon(): string {
@@ -235,6 +288,7 @@ Rectangle {
               source: "assets/arrow.svg"
               width: 20
               height: 20
+              colorSpace: Colors.background
             }
 
             Image {
@@ -245,6 +299,7 @@ Rectangle {
               source: "assets/spinner.svg"
               width: 20
               height: 20
+              colorSpace: Colors.background
 
               NumberAnimation on rotation {
                 from: 0
@@ -269,7 +324,7 @@ Rectangle {
     opacity: root.context.showFailure ? 1 : 0
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.bottom: parent.bottom
-    anchors.bottomMargin: 107
+    anchors.bottomMargin: 22
 
     Behavior on opacity {
       NumberAnimation {
