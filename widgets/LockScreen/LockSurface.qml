@@ -15,12 +15,15 @@ Rectangle {
   function getGreeting() {
     const hour = new Date().getHours();
 
-    if (hour < 5)
+    if (hour < 5) {
       return "Good Night, ";
-    if (hour < 12)
+    }
+    if (hour < 12) {
       return "Good Morning, ";
-    if (hour < 18)
+    }
+    if (hour < 18) {
       return "Good Afternoon, ";
+    }
 
     return "Good Evening, ";
   }
@@ -69,7 +72,7 @@ Rectangle {
 
     anchors.fill: parent
     asynchronous: true
-    cache: true
+    // cache: true
     source: root.image !== "" ? root.image : "fairy-tale.webp"
     opacity: status === Image.Ready ? 1.0 : 0.0
     smooth: true
@@ -292,7 +295,6 @@ Rectangle {
               id: arrow
 
               anchors.centerIn: parent
-              opacity: !root.context.unlockInProgress ? 1 : 0
               source: "assets/arrow.svg"
               width: 20
               height: 20
@@ -310,7 +312,6 @@ Rectangle {
               id: spinner
 
               anchors.centerIn: parent
-              opacity: root.context.unlockInProgress ? 1 : 0
               source: "assets/spinner.svg"
               width: 20
               height: 20

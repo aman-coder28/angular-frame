@@ -42,7 +42,7 @@ ColumnLayout {
         id: musicImage
 
         asynchronous: true
-        cache: true
+        // cache: true
         source: Music.albumArt ?? ""
         fillMode: Image.PreserveAspectCrop
 
@@ -179,7 +179,7 @@ ColumnLayout {
 
       Image {
         asynchronous: true
-        cache: true
+        // cache: true
         source: "assets/repeat.svg"
         width: 19
         height: 19
@@ -202,7 +202,7 @@ ColumnLayout {
 
       Image {
         asynchronous: true
-        cache: true
+        // cache: true
         source: "assets/skip_previous.svg"
         width: 24
         height: 24
@@ -231,7 +231,7 @@ ColumnLayout {
 
       Image {
         asynchronous: true
-        cache: true
+        // cache: true
         source: Music.activePlayer && Music.activePlayer.isPlaying ? "assets/pause.svg" : "assets/play.svg"
         width: 24
         height: 24
@@ -261,7 +261,7 @@ ColumnLayout {
 
       Image {
         asynchronous: true
-        cache: true
+        // cache: true
         source: "assets/skip_next.svg"
         width: 24
         height: 24
@@ -288,7 +288,7 @@ ColumnLayout {
 
       Image {
         asynchronous: true
-        cache: true
+        // cache: true
         source: "assets/shuffle.svg"
         width: 20
         height: 20

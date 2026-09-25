@@ -55,7 +55,7 @@ Row {
 
       Image {
         asynchronous: true
-        cache: true
+        // cache: true
         source: forecastRow.forecastData ? modelData.icon : "°°°"
         width: 26
         height: 26

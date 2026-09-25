@@ -4,6 +4,7 @@ Rectangle {
   width: parent.width
   height: parent.height
   color: Colors.surface_container
+  clip: true
 
   anchors {
     fill: parent

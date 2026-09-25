@@ -156,7 +156,7 @@ PanelWindow {
           id: musicImage
 
           asynchronous: true
-          cache: true
+          // cache: true
           source: Music.albumArt ?? ""
           fillMode: Image.PreserveAspectCrop
 

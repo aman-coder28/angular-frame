@@ -38,7 +38,7 @@ PanelWindow {
   // Clock Logic
   property var currentTime: new Date()
 
-  WlrLayershell.layer: WlrLayershell.Background
+  WlrLayershell.layer: WlrLayer.Bottom
   WlrLayershell.namespace: "material-clock"
   implicitWidth: winSize
   implicitHeight: winSize - 10

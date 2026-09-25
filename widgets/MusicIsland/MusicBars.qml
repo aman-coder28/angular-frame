@@ -5,7 +5,7 @@ Row {
 
   property real barWidth: 4
   property real barSpacing: 3
-  property real maxHeight: 30
+  property real maxHeight: 35
   property real borderRadius: 2
   property bool isPlaying: Music.activePlayer && Music.activePlayer.isPlaying
 

@@ -33,7 +33,7 @@ Rectangle {
 
         Image {
           asynchronous: true
-          cache: true
+          // cache: true
           anchors.horizontalCenter: parent.horizontalCenter
           fillMode: Image.PreserveAspectFit
           width: 50

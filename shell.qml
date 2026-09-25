@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Layouts
 import QtQuick.Shapes
 import Quickshell
 import Quickshell.Wayland
@@ -17,7 +18,7 @@ ShellRoot {
     property int panelW: Math.round(width * 0.190)
     property int strokeW: 8
 
-    WlrLayershell.layer: WlrLayershell.Background
+    WlrLayershell.layer: WlrLayer.Background
     WlrLayershell.namespace: "material-frame"
     color: "transparent"
 
@@ -29,6 +30,8 @@ ShellRoot {
     }
 
     Rectangle {
+      id: frameRect
+
       color: Colors.background
       height: frameWindow.height
       width: frameWindow.panelW
@@ -103,100 +106,53 @@ ShellRoot {
         }
       }
     }
-  }
 
-  Clock {}
+    ColumnLayout {
+      Layout.fillWidth: true
+      anchors.horizontalCenter: frameRect.horizontalCenter
+      spacing: 12
 
-  PanelWindow {
-    WlrLayershell.layer: WlrLayershell.Background
-    implicitWidth: 215
-    implicitHeight: 195
-    color: "transparent"
+      Item {
+        id: clockCard
 
-    mask: Region {
-      item: sideCal
-    }
+        width: 166
+        height: 166
 
-    anchors {
-      top: true
-      left: true
-    }
+        Clock {}
+      }
 
-    margins {
-      top: 178
-      left: 20
-    }
+      Rectangle {
+        id: weatherCard
 
-    Rectangle {
-      id: sideWeather
+        width: 215
+        height: 195
+        radius: 12
+        color: Colors.surface_container
 
-      anchors.fill: parent
-      color: Colors.surface_container
-      radius: 12
+        Weather {}
+      }
 
-      Weather {}
-    }
-  }
+      Rectangle {
+        id: calendarCard
 
-  PanelWindow {
-    WlrLayershell.layer: WlrLayershell.Background
-    implicitWidth: 215
-    implicitHeight: 215
-    color: "transparent"
+        width: 215
+        height: 215
+        radius: 12
+        color: Colors.surface_container
 
-    mask: Region {
-      item: sideWeather
-    }
+        Calendar {}
+      }
 
-    anchors {
-      top: true
-      left: true
-    }
+      Rectangle {
+        id: systemMonitorCard
 
-    margins {
-      top: 386
-      left: 20
-    }
+        implicitWidth: 215
+        implicitHeight: 113
+        radius: 12
+        color: Colors.surface_container
 
-    Rectangle {
-      id: sideCal
-
-      anchors.fill: parent
-      color: Colors.surface_container
-      radius: 12
-
-      Calendar {}
-    }
-  }
-
-  PanelWindow {
-    WlrLayershell.layer: WlrLayershell.Background
-    implicitWidth: 215
-    implicitHeight: 113
-    color: "transparent"
-
-    mask: Region {
-      item: systemWidget
-    }
-
-    anchors {
-      top: true
-      left: true
-    }
-
-    margins {
-      top: 613
-      left: 20
-    }
-
-    Rectangle {
-      id: systemWidget
-
-      anchors.fill: parent
-      color: Colors.surface_container
-      radius: 12
-
-      SystemMonitor {}
+        SystemMonitor {}
+      }
     }
   }
 }
