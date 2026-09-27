@@ -43,6 +43,7 @@ ColumnLayout {
 
         asynchronous: true
         // cache: true
+        sourceSize: Qt.size(57, 57)
         source: Music.albumArt ?? ""
         fillMode: Image.PreserveAspectCrop
 

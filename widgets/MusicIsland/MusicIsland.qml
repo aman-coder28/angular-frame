@@ -158,6 +158,7 @@ PanelWindow {
           asynchronous: true
           // cache: true
           source: Music.albumArt ?? ""
+          sourceSize: Qt.size(19, 19)
           fillMode: Image.PreserveAspectCrop
 
           anchors {

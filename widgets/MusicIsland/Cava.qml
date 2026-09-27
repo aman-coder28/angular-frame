@@ -16,11 +16,10 @@ Singleton {
 
   Connections {
     function onActivePlayerChanged() {
-      if (root.available && !cavaProc.running) {
-        cavaProc.running = true;
-      } else if (!root.available && cavaProc.running) {
-        cavaProc.running = false;
-      }
+      const want = root.available && Music.activePlayer !== null && Music.activePlayer.isPlaying;
+
+      if (want !== cavaProc.running)
+        cavaProc.running = want;
     }
 
     target: Music

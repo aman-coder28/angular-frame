@@ -29,6 +29,10 @@ ShellRoot {
       top: true
     }
 
+    margins {
+      left: -7
+    }
+
     Rectangle {
       id: frameRect
 
@@ -110,7 +114,7 @@ ShellRoot {
     ColumnLayout {
       Layout.fillWidth: true
       anchors.horizontalCenter: frameRect.horizontalCenter
-      spacing: 12
+      spacing: 12.5
 
       Item {
         id: clockCard

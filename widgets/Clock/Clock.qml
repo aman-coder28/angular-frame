@@ -204,6 +204,8 @@ PanelWindow {
   Canvas {
     id: dayCanvas
 
+    property string dayText: currentTime.toLocaleDateString(Qt.locale("en_US"), "dddd")
+
     visible: showDayLabel
     anchors.fill: parent
     anchors.margins: winSize * 0.03
@@ -214,7 +216,6 @@ PanelWindow {
       ctx.reset();
       var cx = width / 2;
       var cy = height / 2;
-      var dayText = currentTime.toLocaleDateString(Qt.locale("en_US"), "dddd");
 
       var textRadius = winSize * 0.22;
       var fontSize = winSize * 0.055;
@@ -238,13 +239,10 @@ PanelWindow {
         ctx.restore();
       }
     }
+    onDayTextChanged: requestPaint()
     Component.onCompleted: requestPaint()
 
     Connections {
-      function onCurrentTimeChanged() {
-        dayCanvas.requestPaint();
-      }
-
       function onWinSizeChanged() {
         dayCanvas.requestPaint();
       }
