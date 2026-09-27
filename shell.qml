@@ -140,7 +140,7 @@ ShellRoot {
         id: calendarCard
 
         width: 215
-        height: 215
+        height: 218
         radius: 12
         color: Colors.surface_container
 
