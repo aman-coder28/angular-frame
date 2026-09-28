@@ -238,7 +238,7 @@ Rectangle {
         TextField {
           id: passwordBox
 
-          property var passwordIcons: ["●", "◆", "❄"]
+          property var passwordIcons: ["●", "⚉", "\u2726"]
           property var passwordSequence: []
 
           function getRandomIcon(): string {

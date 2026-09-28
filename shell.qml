@@ -30,7 +30,7 @@ ShellRoot {
     }
 
     margins {
-      left: -7
+      left: -8
     }
 
     Rectangle {
@@ -114,13 +114,13 @@ ShellRoot {
     ColumnLayout {
       Layout.fillWidth: true
       anchors.horizontalCenter: frameRect.horizontalCenter
-      spacing: 12.5
+      spacing: 11.5
 
       Item {
         id: clockCard
 
         width: 166
-        height: 166
+        height: 165
 
         Clock {}
       }
