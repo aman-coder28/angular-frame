@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Shapes
 import Quickshell
 import Quickshell.Wayland
+import "widgets/Calendar"
 import "widgets/Clock"
 import "widgets/MusicIsland"
 import "widgets/SystemMonitor"
