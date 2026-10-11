@@ -2,7 +2,7 @@
 
 ![Preview](frame.jpg)
 
-A Wayland desktop shell built with [Quickshell](https://quickshell.outfoxxed.me/) and Qt Quick, featuring an angular sidebar frame, a floating music pill, and a scalloped analog clock.
+A Wayland desktop Widgets built with [Quickshell](https://quickshell.outfoxxed.me/) and Qt Quick, featuring an angular sidebar frame, a floating music pill, and a scalloped analog clock.
 
 ## Overview
 
