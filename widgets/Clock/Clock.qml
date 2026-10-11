@@ -3,6 +3,7 @@ import QtQuick.Controls
 import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
+import "../.."
 
 PanelWindow {
   id: root
@@ -19,7 +20,7 @@ PanelWindow {
   property bool showSecondHand: settings.showSecondHand
   property bool showSecondHandLine: settings.showSecondHandLine
   property color bgColor: Colors.secondary
-  property color accentColor: Colors.primary
+  property color accentColor: Colors.on_primary
   property color primaryColor: Colors.background
   property color secondaryColor: Colors.surface_bright
   readonly property real ratio: winSize / 320.0
@@ -148,6 +149,10 @@ PanelWindow {
         clockFace.requestPaint();
       }
 
+      function onBgColorChanged() {
+        clockFace.requestPaint();
+      }
+
       target: root
     }
   }
@@ -244,6 +249,10 @@ PanelWindow {
 
     Connections {
       function onWinSizeChanged() {
+        dayCanvas.requestPaint();
+      }
+
+      function onPrimaryColorChanged() {
         dayCanvas.requestPaint();
       }
 

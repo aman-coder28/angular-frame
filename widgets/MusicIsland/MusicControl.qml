@@ -4,6 +4,7 @@ import QtQuick.Effects
 import QtQuick.Layouts
 import Quickshell.Services.Mpris
 import Quickshell.Widgets
+import "../.."
 
 ColumnLayout {
   id: controls
