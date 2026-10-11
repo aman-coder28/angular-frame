@@ -18,6 +18,10 @@ ShellRoot {
     property int cutout: Math.round(width * 0.12)
     property int panelW: Math.round(width * 0.190)
     property int strokeW: 8
+    property int rightInset: 13
+    property int rightSealInset: 4
+    property int bottomInset: 12
+    property int bottomSealInset: 3
 
     WlrLayershell.layer: WlrLayer.Background
     WlrLayershell.namespace: "material-frame"
@@ -114,14 +118,14 @@ ShellRoot {
       ShapePath {
         fillColor: "transparent"
         joinStyle: ShapePath.MiterJoin
-        startX: 1360
+        startX: frameWindow.width - frameWindow.rightInset
         startY: 7
         strokeColor: Colors.primary
         strokeStyle: ShapePath.SolidLine
         strokeWidth: frameWindow.strokeW
 
         PathLine {
-          x: 1360
+          x: frameWindow.width - frameWindow.rightInset
           y: frame.height
         }
       }
@@ -129,30 +133,29 @@ ShellRoot {
       ShapePath {
         fillColor: "transparent"
         joinStyle: ShapePath.MiterJoin
-        startX: 1369
+        startX: frameWindow.width - frameWindow.rightSealInset
         startY: 0
         strokeColor: Colors.background
         strokeStyle: ShapePath.SolidLine
         strokeWidth: 10
 
         PathLine {
-          x: 1369
+          x: frameWindow.width - frameWindow.rightSealInset
           y: frameWindow.height
         }
       }
 
-      // Define your shape path here
       ShapePath {
         strokeWidth: frameWindow.strokeW
         strokeColor: Colors.primary
         fillColor: "transparent"
         startX: frameWindow.panelW
-        startY: 721
+        startY: frameWindow.height - frameWindow.bottomInset
         strokeStyle: ShapePath.SolidLine
 
         PathLine {
-          x: 1360
-          y: 721
+          x: frameWindow.width - frameWindow.rightInset
+          y: frameWindow.height - frameWindow.bottomInset
         }
       }
 
@@ -160,14 +163,14 @@ ShellRoot {
         fillColor: "transparent"
         joinStyle: ShapePath.MiterJoin
         startX: frameWindow.panelW
-        startY: 731
+        startY: frameWindow.height - frameWindow.bottomSealInset
         strokeColor: Colors.background
         strokeStyle: ShapePath.SolidLine
         strokeWidth: 12
 
         PathLine {
-          x: 1359
-          y: 731
+          x: frameWindow.width - frameWindow.rightInset - 1
+          y: frameWindow.height - frameWindow.bottomSealInset
         }
       }
     }
