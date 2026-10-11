@@ -56,17 +56,17 @@ Rectangle {
           font.weight: 430
           font.pixelSize: 15
           color: Colors.secondary
-          font.letterSpacing: 0.8
+          font.letterSpacing: 0.9
         }
 
         Text {
           text: Service.loaded || Service.cached ? Service.wmoIcon(Service.cur.weather_code).replace(/-/, " ") : "..."
-          font.weight: Font.Medium
+          font.weight: Font.Normal
           font.family: "Google Sans"
           font.pixelSize: 16
           color: Colors.secondary
           Layout.alignment: Qt.AlignRight
-          font.letterSpacing: 0.8
+          font.letterSpacing: 0.7
           font.capitalization: Font.Capitalize
         }
       }

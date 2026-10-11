@@ -32,7 +32,7 @@ Row {
   anchors {
     fill: parent
     rightMargin: 15
-    topMargin: 12
+    topMargin: 16
   }
 
   Repeater {

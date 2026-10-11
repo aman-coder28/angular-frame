@@ -110,6 +110,66 @@ ShellRoot {
           y: frame.height
         }
       }
+
+      ShapePath {
+        fillColor: "transparent"
+        joinStyle: ShapePath.MiterJoin
+        startX: 1360
+        startY: 7
+        strokeColor: Colors.primary
+        strokeStyle: ShapePath.SolidLine
+        strokeWidth: frameWindow.strokeW
+
+        PathLine {
+          x: 1360
+          y: frame.height
+        }
+      }
+
+      ShapePath {
+        fillColor: "transparent"
+        joinStyle: ShapePath.MiterJoin
+        startX: 1369
+        startY: 0
+        strokeColor: Colors.background
+        strokeStyle: ShapePath.SolidLine
+        strokeWidth: 10
+
+        PathLine {
+          x: 1369
+          y: frameWindow.height
+        }
+      }
+
+      // Define your shape path here
+      ShapePath {
+        strokeWidth: frameWindow.strokeW
+        strokeColor: Colors.primary
+        fillColor: "transparent"
+        startX: frameWindow.panelW
+        startY: 721
+        strokeStyle: ShapePath.SolidLine
+
+        PathLine {
+          x: 1360
+          y: 721
+        }
+      }
+
+      ShapePath {
+        fillColor: "transparent"
+        joinStyle: ShapePath.MiterJoin
+        startX: frameWindow.panelW
+        startY: 731
+        strokeColor: Colors.background
+        strokeStyle: ShapePath.SolidLine
+        strokeWidth: 12
+
+        PathLine {
+          x: 1359
+          y: 731
+        }
+      }
     }
 
     ColumnLayout {
